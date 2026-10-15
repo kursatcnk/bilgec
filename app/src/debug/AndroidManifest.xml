@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <activity
+            android:name=".QuestionActivity"
+            android:exported="true"
+            tools:replace="android:exported" />
+        <receiver
+            android:name=".DebugQuestionReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="com.bilgec.app.debug.TRIGGER_QUESTION" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
