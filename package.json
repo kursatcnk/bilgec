@@ -1,0 +1,12 @@
+{
+  "name": "bilgec-data-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-data": "node tools/generate-questions.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.34.4",
+    "sql.js": "1.13.0"
+  }
+}

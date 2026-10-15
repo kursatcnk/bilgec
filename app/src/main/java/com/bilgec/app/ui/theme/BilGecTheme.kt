@@ -6,6 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.bilgec.app.settings.DarkMode
 
 private val LightColors = lightColorScheme(
     primary = Color(0xFF5B4BD8),
@@ -22,9 +23,17 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun BilGecTheme(content: @Composable () -> Unit) {
+fun BilGecTheme(
+    darkMode: DarkMode = DarkMode.SYSTEM,
+    content: @Composable () -> Unit,
+) {
+    val useDarkColors = when (darkMode) {
+        DarkMode.SYSTEM -> isSystemInDarkTheme()
+        DarkMode.LIGHT -> false
+        DarkMode.DARK -> true
+    }
     MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) DarkColors else LightColors,
+        colorScheme = if (useDarkColors) DarkColors else LightColors,
         content = content,
     )
 }

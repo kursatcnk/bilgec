@@ -1,0 +1,2602 @@
+[
+  {
+    "category": "Tarih",
+    "prompt": "Magna Carta'nın imzalanması hangi yılda gerçekleşti?",
+    "correct": "1215",
+    "wrong": [
+      "1216",
+      "1210",
+      "1225"
+    ],
+    "explanation": "Magna Carta'nın imzalanması, 1215 yılında gerçekleşti.",
+    "factKey": "manual-history:1",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Malazgirt Meydan Muharebesi hangi yılda gerçekleşti?",
+    "correct": "1071",
+    "wrong": [
+      "1072",
+      "1066",
+      "1081"
+    ],
+    "explanation": "Malazgirt Meydan Muharebesi, 1071 yılında gerçekleşti.",
+    "factKey": "manual-history:2",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "İstanbul'un fethi hangi yılda gerçekleşti?",
+    "correct": "1453",
+    "wrong": [
+      "1454",
+      "1448",
+      "1463"
+    ],
+    "explanation": "İstanbul'un fethi, 1453 yılında gerçekleşti.",
+    "factKey": "manual-history:3",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Kristof Kolomb'un Amerika kıtasına ilk yolculuğu hangi yılda gerçekleşti?",
+    "correct": "1492",
+    "wrong": [
+      "1493",
+      "1487",
+      "1502"
+    ],
+    "explanation": "Kristof Kolomb'un Amerika kıtasına ilk yolculuğu, 1492 yılında gerçekleşti.",
+    "factKey": "manual-history:4",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Amerikan Bağımsızlık Bildirgesi'nin kabulü hangi yılda gerçekleşti?",
+    "correct": "1776",
+    "wrong": [
+      "1777",
+      "1771",
+      "1786"
+    ],
+    "explanation": "Amerikan Bağımsızlık Bildirgesi'nin kabulü, 1776 yılında gerçekleşti.",
+    "factKey": "manual-history:5",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Fransız Devrimi'nin başlaması hangi yılda gerçekleşti?",
+    "correct": "1789",
+    "wrong": [
+      "1790",
+      "1784",
+      "1799"
+    ],
+    "explanation": "Fransız Devrimi'nin başlaması, 1789 yılında gerçekleşti.",
+    "factKey": "manual-history:6",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Sened-i İttifak'ın imzalanması hangi yılda gerçekleşti?",
+    "correct": "1808",
+    "wrong": [
+      "1809",
+      "1803",
+      "1818"
+    ],
+    "explanation": "Sened-i İttifak'ın imzalanması, 1808 yılında gerçekleşti.",
+    "factKey": "manual-history:7",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Stockton-Darlington demiryolunun açılması hangi yılda gerçekleşti?",
+    "correct": "1825",
+    "wrong": [
+      "1826",
+      "1820",
+      "1835"
+    ],
+    "explanation": "Stockton-Darlington demiryolunun açılması, 1825 yılında gerçekleşti.",
+    "factKey": "manual-history:8",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Tanzimat Fermanı'nın ilanı hangi yılda gerçekleşti?",
+    "correct": "1839",
+    "wrong": [
+      "1840",
+      "1834",
+      "1849"
+    ],
+    "explanation": "Tanzimat Fermanı'nın ilanı, 1839 yılında gerçekleşti.",
+    "factKey": "manual-history:9",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Amerikan İç Savaşı'nın başlaması hangi yılda gerçekleşti?",
+    "correct": "1861",
+    "wrong": [
+      "1862",
+      "1856",
+      "1871"
+    ],
+    "explanation": "Amerikan İç Savaşı'nın başlaması, 1861 yılında gerçekleşti.",
+    "factKey": "manual-history:10",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Amerikan İç Savaşı'nın sona ermesi hangi yılda gerçekleşti?",
+    "correct": "1865",
+    "wrong": [
+      "1866",
+      "1860",
+      "1875"
+    ],
+    "explanation": "Amerikan İç Savaşı'nın sona ermesi, 1865 yılında gerçekleşti.",
+    "factKey": "manual-history:11",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Süveyş Kanalı'nın açılması hangi yılda gerçekleşti?",
+    "correct": "1869",
+    "wrong": [
+      "1870",
+      "1864",
+      "1879"
+    ],
+    "explanation": "Süveyş Kanalı'nın açılması, 1869 yılında gerçekleşti.",
+    "factKey": "manual-history:12",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Alexander Graham Bell'in telefon patentini alması hangi yılda gerçekleşti?",
+    "correct": "1876",
+    "wrong": [
+      "1877",
+      "1871",
+      "1886"
+    ],
+    "explanation": "Alexander Graham Bell'in telefon patentini alması, 1876 yılında gerçekleşti.",
+    "factKey": "manual-history:13",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "İlk modern Olimpiyat Oyunları hangi yılda gerçekleşti?",
+    "correct": "1896",
+    "wrong": [
+      "1897",
+      "1891",
+      "1906"
+    ],
+    "explanation": "İlk modern Olimpiyat Oyunları, 1896 yılında gerçekleşti.",
+    "factKey": "manual-history:14",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Wright kardeşlerin ilk kontrollü motorlu uçuşu hangi yılda gerçekleşti?",
+    "correct": "1903",
+    "wrong": [
+      "1904",
+      "1898",
+      "1913"
+    ],
+    "explanation": "Wright kardeşlerin ilk kontrollü motorlu uçuşu, 1903 yılında gerçekleşti.",
+    "factKey": "manual-history:15",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Titanik'in batması hangi yılda gerçekleşti?",
+    "correct": "1912",
+    "wrong": [
+      "1913",
+      "1907",
+      "1922"
+    ],
+    "explanation": "Titanik'in batması, 1912 yılında gerçekleşti.",
+    "factKey": "manual-history:16",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Panama Kanalı'nın açılması hangi yılda gerçekleşti?",
+    "correct": "1914",
+    "wrong": [
+      "1915",
+      "1909",
+      "1924"
+    ],
+    "explanation": "Panama Kanalı'nın açılması, 1914 yılında gerçekleşti.",
+    "factKey": "manual-history:17",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Birinci Dünya Savaşı'nın başlaması hangi yılda gerçekleşti?",
+    "correct": "1914",
+    "wrong": [
+      "1915",
+      "1909",
+      "1924"
+    ],
+    "explanation": "Birinci Dünya Savaşı'nın başlaması, 1914 yılında gerçekleşti.",
+    "factKey": "manual-history:18",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Birinci Dünya Savaşı'nın sona ermesi hangi yılda gerçekleşti?",
+    "correct": "1918",
+    "wrong": [
+      "1919",
+      "1913",
+      "1928"
+    ],
+    "explanation": "Birinci Dünya Savaşı'nın sona ermesi, 1918 yılında gerçekleşti.",
+    "factKey": "manual-history:19",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Türkiye Büyük Millet Meclisinin açılması hangi yılda gerçekleşti?",
+    "correct": "1920",
+    "wrong": [
+      "1921",
+      "1915",
+      "1930"
+    ],
+    "explanation": "Türkiye Büyük Millet Meclisinin açılması, 1920 yılında gerçekleşti.",
+    "factKey": "manual-history:20",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Büyük Taarruz'un başlaması hangi yılda gerçekleşti?",
+    "correct": "1922",
+    "wrong": [
+      "1923",
+      "1917",
+      "1932"
+    ],
+    "explanation": "Büyük Taarruz'un başlaması, 1922 yılında gerçekleşti.",
+    "factKey": "manual-history:21",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Saltanatın kaldırılması hangi yılda gerçekleşti?",
+    "correct": "1922",
+    "wrong": [
+      "1923",
+      "1917",
+      "1932"
+    ],
+    "explanation": "Saltanatın kaldırılması, 1922 yılında gerçekleşti.",
+    "factKey": "manual-history:22",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Türkiye Cumhuriyeti'nin ilanı hangi yılda gerçekleşti?",
+    "correct": "1923",
+    "wrong": [
+      "1924",
+      "1918",
+      "1933"
+    ],
+    "explanation": "Türkiye Cumhuriyeti'nin ilanı, 1923 yılında gerçekleşti.",
+    "factKey": "manual-history:23",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Lozan Barış Antlaşması'nın imzalanması hangi yılda gerçekleşti?",
+    "correct": "1923",
+    "wrong": [
+      "1924",
+      "1918",
+      "1933"
+    ],
+    "explanation": "Lozan Barış Antlaşması'nın imzalanması, 1923 yılında gerçekleşti.",
+    "factKey": "manual-history:24",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Halifeliğin kaldırılması hangi yılda gerçekleşti?",
+    "correct": "1924",
+    "wrong": [
+      "1925",
+      "1919",
+      "1934"
+    ],
+    "explanation": "Halifeliğin kaldırılması, 1924 yılında gerçekleşti.",
+    "factKey": "manual-history:25",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Türkiye'de Latin esaslı Türk alfabesinin kabulü hangi yılda gerçekleşti?",
+    "correct": "1928",
+    "wrong": [
+      "1929",
+      "1923",
+      "1938"
+    ],
+    "explanation": "Türkiye'de Latin esaslı Türk alfabesinin kabulü, 1928 yılında gerçekleşti.",
+    "factKey": "manual-history:26",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Alexander Fleming'in penisilini keşfetmesi hangi yılda gerçekleşti?",
+    "correct": "1928",
+    "wrong": [
+      "1929",
+      "1923",
+      "1938"
+    ],
+    "explanation": "Alexander Fleming'in penisilini keşfetmesi, 1928 yılında gerçekleşti.",
+    "factKey": "manual-history:27",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Türkiye'de kadınlara milletvekili seçme ve seçilme hakkı tanınması hangi yılda gerçekleşti?",
+    "correct": "1934",
+    "wrong": [
+      "1935",
+      "1929",
+      "1944"
+    ],
+    "explanation": "Türkiye'de kadınlara milletvekili seçme ve seçilme hakkı tanınması, 1934 yılında gerçekleşti.",
+    "factKey": "manual-history:28",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "İkinci Dünya Savaşı'nın başlaması hangi yılda gerçekleşti?",
+    "correct": "1939",
+    "wrong": [
+      "1940",
+      "1934",
+      "1949"
+    ],
+    "explanation": "İkinci Dünya Savaşı'nın başlaması, 1939 yılında gerçekleşti.",
+    "factKey": "manual-history:29",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Birleşmiş Milletler Antlaşması'nın yürürlüğe girmesi hangi yılda gerçekleşti?",
+    "correct": "1945",
+    "wrong": [
+      "1946",
+      "1940",
+      "1955"
+    ],
+    "explanation": "Birleşmiş Milletler Antlaşması'nın yürürlüğe girmesi, 1945 yılında gerçekleşti.",
+    "factKey": "manual-history:30",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "İkinci Dünya Savaşı'nın sona ermesi hangi yılda gerçekleşti?",
+    "correct": "1945",
+    "wrong": [
+      "1946",
+      "1940",
+      "1955"
+    ],
+    "explanation": "İkinci Dünya Savaşı'nın sona ermesi, 1945 yılında gerçekleşti.",
+    "factKey": "manual-history:31",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Hindistan'ın bağımsızlığını kazanması hangi yılda gerçekleşti?",
+    "correct": "1947",
+    "wrong": [
+      "1948",
+      "1942",
+      "1957"
+    ],
+    "explanation": "Hindistan'ın bağımsızlığını kazanması, 1947 yılında gerçekleşti.",
+    "factKey": "manual-history:32",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "NATO'nun kurulması hangi yılda gerçekleşti?",
+    "correct": "1949",
+    "wrong": [
+      "1950",
+      "1944",
+      "1959"
+    ],
+    "explanation": "NATO'nun kurulması, 1949 yılında gerçekleşti.",
+    "factKey": "manual-history:33",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "DNA çift sarmal modelinin yayımlanması hangi yılda gerçekleşti?",
+    "correct": "1953",
+    "wrong": [
+      "1954",
+      "1948",
+      "1963"
+    ],
+    "explanation": "DNA çift sarmal modelinin yayımlanması, 1953 yılında gerçekleşti.",
+    "factKey": "manual-history:34",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Roma Antlaşması'nın imzalanması hangi yılda gerçekleşti?",
+    "correct": "1957",
+    "wrong": [
+      "1958",
+      "1952",
+      "1967"
+    ],
+    "explanation": "Roma Antlaşması'nın imzalanması, 1957 yılında gerçekleşti.",
+    "factKey": "manual-history:35",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Sputnik 1'in uzaya fırlatılması hangi yılda gerçekleşti?",
+    "correct": "1957",
+    "wrong": [
+      "1958",
+      "1952",
+      "1967"
+    ],
+    "explanation": "Sputnik 1'in uzaya fırlatılması, 1957 yılında gerçekleşti.",
+    "factKey": "manual-history:36",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Yuri Gagarin'in uzaya çıkan ilk insan olması hangi yılda gerçekleşti?",
+    "correct": "1961",
+    "wrong": [
+      "1962",
+      "1956",
+      "1971"
+    ],
+    "explanation": "Yuri Gagarin'in uzaya çıkan ilk insan olması, 1961 yılında gerçekleşti.",
+    "factKey": "manual-history:37",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Apollo 11'in Ay'a insan indirmesi hangi yılda gerçekleşti?",
+    "correct": "1969",
+    "wrong": [
+      "1970",
+      "1964",
+      "1979"
+    ],
+    "explanation": "Apollo 11'in Ay'a insan indirmesi, 1969 yılında gerçekleşti.",
+    "factKey": "manual-history:38",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Çernobil nükleer kazası hangi yılda gerçekleşti?",
+    "correct": "1986",
+    "wrong": [
+      "1987",
+      "1981",
+      "1996"
+    ],
+    "explanation": "Çernobil nükleer kazası, 1986 yılında gerçekleşti.",
+    "factKey": "manual-history:39",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Berlin Duvarı'nın yıkılması hangi yılda gerçekleşti?",
+    "correct": "1989",
+    "wrong": [
+      "1990",
+      "1984",
+      "1999"
+    ],
+    "explanation": "Berlin Duvarı'nın yıkılması, 1989 yılında gerçekleşti.",
+    "factKey": "manual-history:40",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Sovyetler Birliği'nin dağılması hangi yılda gerçekleşti?",
+    "correct": "1991",
+    "wrong": [
+      "1992",
+      "1986",
+      "2001"
+    ],
+    "explanation": "Sovyetler Birliği'nin dağılması, 1991 yılında gerçekleşti.",
+    "factKey": "manual-history:41",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Maastricht Antlaşması'nın imzalanması hangi yılda gerçekleşti?",
+    "correct": "1992",
+    "wrong": [
+      "1993",
+      "1987",
+      "2002"
+    ],
+    "explanation": "Maastricht Antlaşması'nın imzalanması, 1992 yılında gerçekleşti.",
+    "factKey": "manual-history:42",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Rosetta Taşı'nın bulunması hangi yılda gerçekleşti?",
+    "correct": "1799",
+    "wrong": [
+      "1800",
+      "1794",
+      "1809"
+    ],
+    "explanation": "Rosetta Taşı'nın bulunması, 1799 yılında gerçekleşti.",
+    "factKey": "manual-history:43",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Pompeii'yi örten Vezüv patlaması hangi yılda gerçekleşti?",
+    "correct": "79",
+    "wrong": [
+      "80",
+      "74",
+      "89"
+    ],
+    "explanation": "Pompeii'yi örten Vezüv patlaması, 79 yılında gerçekleşti.",
+    "factKey": "manual-history:44",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Rusya'daki Ekim Devrimi hangi yılda gerçekleşti?",
+    "correct": "1917",
+    "wrong": [
+      "1918",
+      "1912",
+      "1927"
+    ],
+    "explanation": "Rusya'daki Ekim Devrimi, 1917 yılında gerçekleşti.",
+    "factKey": "manual-history:45",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Kore Savaşı'nın başlaması hangi yılda gerçekleşti?",
+    "correct": "1950",
+    "wrong": [
+      "1951",
+      "1945",
+      "1960"
+    ],
+    "explanation": "Kore Savaşı'nın başlaması, 1950 yılında gerçekleşti.",
+    "factKey": "manual-history:46",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Küba Füze Krizi hangi yılda gerçekleşti?",
+    "correct": "1962",
+    "wrong": [
+      "1963",
+      "1957",
+      "1972"
+    ],
+    "explanation": "Küba Füze Krizi, 1962 yılında gerçekleşti.",
+    "factKey": "manual-history:47",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "İnsan Hakları Evrensel Bildirgesi'nin kabulü hangi yılda gerçekleşti?",
+    "correct": "1948",
+    "wrong": [
+      "1949",
+      "1943",
+      "1958"
+    ],
+    "explanation": "İnsan Hakları Evrensel Bildirgesi'nin kabulü, 1948 yılında gerçekleşti.",
+    "factKey": "manual-history:48",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "İlk kalıcı transatlantik telgraf kablosunun hizmete girmesi hangi yılda gerçekleşti?",
+    "correct": "1866",
+    "wrong": [
+      "1867",
+      "1861",
+      "1876"
+    ],
+    "explanation": "İlk kalıcı transatlantik telgraf kablosunun hizmete girmesi, 1866 yılında gerçekleşti.",
+    "factKey": "manual-history:49",
+    "reviewed": false
+  },
+  {
+    "category": "Tarih",
+    "prompt": "Euro banknot ve madeni paralarının dolaşıma girmesi hangi yılda gerçekleşti?",
+    "correct": "2002",
+    "wrong": [
+      "2003",
+      "1997",
+      "2012"
+    ],
+    "explanation": "Euro banknot ve madeni paralarının dolaşıma girmesi, 2002 yılında gerçekleşti.",
+    "factKey": "manual-history:50",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Mona Lisa” adlı eserin sanatçısı kimdir?",
+    "correct": "Leonardo da Vinci",
+    "wrong": [
+      "Vincent van Gogh",
+      "Pablo Picasso",
+      "Edvard Munch"
+    ],
+    "explanation": "“Mona Lisa”, Leonardo da Vinci tarafından yapılmıştır.",
+    "factKey": "manual-art:1",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Yıldızlı Gece” adlı eserin sanatçısı kimdir?",
+    "correct": "Vincent van Gogh",
+    "wrong": [
+      "Pablo Picasso",
+      "Edvard Munch",
+      "Johannes Vermeer"
+    ],
+    "explanation": "“Yıldızlı Gece”, Vincent van Gogh tarafından yapılmıştır.",
+    "factKey": "manual-art:2",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Guernica” adlı eserin sanatçısı kimdir?",
+    "correct": "Pablo Picasso",
+    "wrong": [
+      "Edvard Munch",
+      "Johannes Vermeer",
+      "Michelangelo"
+    ],
+    "explanation": "“Guernica”, Pablo Picasso tarafından yapılmıştır.",
+    "factKey": "manual-art:3",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Çığlık” adlı eserin sanatçısı kimdir?",
+    "correct": "Edvard Munch",
+    "wrong": [
+      "Johannes Vermeer",
+      "Michelangelo",
+      "Salvador Dalí"
+    ],
+    "explanation": "“Çığlık”, Edvard Munch tarafından yapılmıştır.",
+    "factKey": "manual-art:4",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“İnci Küpeli Kız” adlı eserin sanatçısı kimdir?",
+    "correct": "Johannes Vermeer",
+    "wrong": [
+      "Michelangelo",
+      "Salvador Dalí",
+      "Diego Velázquez"
+    ],
+    "explanation": "“İnci Küpeli Kız”, Johannes Vermeer tarafından yapılmıştır.",
+    "factKey": "manual-art:5",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Âdem'in Yaratılışı” adlı eserin sanatçısı kimdir?",
+    "correct": "Michelangelo",
+    "wrong": [
+      "Salvador Dalí",
+      "Diego Velázquez",
+      "Rembrandt"
+    ],
+    "explanation": "“Âdem'in Yaratılışı”, Michelangelo tarafından yapılmıştır.",
+    "factKey": "manual-art:6",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Belleğin Azmi” adlı eserin sanatçısı kimdir?",
+    "correct": "Salvador Dalí",
+    "wrong": [
+      "Diego Velázquez",
+      "Rembrandt",
+      "Sandro Botticelli"
+    ],
+    "explanation": "“Belleğin Azmi”, Salvador Dalí tarafından yapılmıştır.",
+    "factKey": "manual-art:7",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Las Meninas” adlı eserin sanatçısı kimdir?",
+    "correct": "Diego Velázquez",
+    "wrong": [
+      "Rembrandt",
+      "Sandro Botticelli",
+      "Grant Wood"
+    ],
+    "explanation": "“Las Meninas”, Diego Velázquez tarafından yapılmıştır.",
+    "factKey": "manual-art:8",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Gece Devriyesi” adlı eserin sanatçısı kimdir?",
+    "correct": "Rembrandt",
+    "wrong": [
+      "Sandro Botticelli",
+      "Grant Wood",
+      "Claude Monet"
+    ],
+    "explanation": "“Gece Devriyesi”, Rembrandt tarafından yapılmıştır.",
+    "factKey": "manual-art:9",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Venüs'ün Doğuşu” adlı eserin sanatçısı kimdir?",
+    "correct": "Sandro Botticelli",
+    "wrong": [
+      "Grant Wood",
+      "Claude Monet",
+      "Auguste Rodin"
+    ],
+    "explanation": "“Venüs'ün Doğuşu”, Sandro Botticelli tarafından yapılmıştır.",
+    "factKey": "manual-art:10",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Amerikan Gotiği” adlı eserin sanatçısı kimdir?",
+    "correct": "Grant Wood",
+    "wrong": [
+      "Claude Monet",
+      "Auguste Rodin",
+      "Gustav Klimt"
+    ],
+    "explanation": "“Amerikan Gotiği”, Grant Wood tarafından yapılmıştır.",
+    "factKey": "manual-art:11",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Nilüferler” adlı eserin sanatçısı kimdir?",
+    "correct": "Claude Monet",
+    "wrong": [
+      "Auguste Rodin",
+      "Gustav Klimt",
+      "Jan van Eyck"
+    ],
+    "explanation": "“Nilüferler”, Claude Monet tarafından yapılmıştır.",
+    "factKey": "manual-art:12",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Düşünen Adam” adlı eserin sanatçısı kimdir?",
+    "correct": "Auguste Rodin",
+    "wrong": [
+      "Gustav Klimt",
+      "Jan van Eyck",
+      "Eugène Delacroix"
+    ],
+    "explanation": "“Düşünen Adam”, Auguste Rodin tarafından yapılmıştır.",
+    "factKey": "manual-art:13",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Davut heykeli” adlı eserin sanatçısı kimdir?",
+    "correct": "Michelangelo",
+    "wrong": [
+      "Jan van Eyck",
+      "Eugène Delacroix",
+      "Raffaello"
+    ],
+    "explanation": "“Davut heykeli”, Michelangelo tarafından yapılmıştır.",
+    "factKey": "manual-art:14",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Öpücük” adlı eserin sanatçısı kimdir?",
+    "correct": "Gustav Klimt",
+    "wrong": [
+      "Eugène Delacroix",
+      "Raffaello",
+      "Hieronymus Bosch"
+    ],
+    "explanation": "“Öpücük”, Gustav Klimt tarafından yapılmıştır.",
+    "factKey": "manual-art:15",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Arnolfini'nin Evlenmesi” adlı eserin sanatçısı kimdir?",
+    "correct": "Jan van Eyck",
+    "wrong": [
+      "Raffaello",
+      "Hieronymus Bosch",
+      "James McNeill Whistler"
+    ],
+    "explanation": "“Arnolfini'nin Evlenmesi”, Jan van Eyck tarafından yapılmıştır.",
+    "factKey": "manual-art:16",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Halka Yol Gösteren Özgürlük” adlı eserin sanatçısı kimdir?",
+    "correct": "Eugène Delacroix",
+    "wrong": [
+      "Hieronymus Bosch",
+      "James McNeill Whistler",
+      "René Magritte"
+    ],
+    "explanation": "“Halka Yol Gösteren Özgürlük”, Eugène Delacroix tarafından yapılmıştır.",
+    "factKey": "manual-art:17",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Atina Okulu” adlı eserin sanatçısı kimdir?",
+    "correct": "Raffaello",
+    "wrong": [
+      "James McNeill Whistler",
+      "René Magritte",
+      "Andy Warhol"
+    ],
+    "explanation": "“Atina Okulu”, Raffaello tarafından yapılmıştır.",
+    "factKey": "manual-art:18",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Dünyevi Zevkler Bahçesi” adlı eserin sanatçısı kimdir?",
+    "correct": "Hieronymus Bosch",
+    "wrong": [
+      "René Magritte",
+      "Andy Warhol",
+      "Édouard Manet"
+    ],
+    "explanation": "“Dünyevi Zevkler Bahçesi”, Hieronymus Bosch tarafından yapılmıştır.",
+    "factKey": "manual-art:19",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Whistler'ın Annesi” adlı eserin sanatçısı kimdir?",
+    "correct": "James McNeill Whistler",
+    "wrong": [
+      "Andy Warhol",
+      "Édouard Manet",
+      "Pierre-Auguste Renoir"
+    ],
+    "explanation": "“Whistler'ın Annesi”, James McNeill Whistler tarafından yapılmıştır.",
+    "factKey": "manual-art:20",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“İnsanoğlu” adlı eserin sanatçısı kimdir?",
+    "correct": "René Magritte",
+    "wrong": [
+      "Édouard Manet",
+      "Pierre-Auguste Renoir",
+      "Katsushika Hokusai"
+    ],
+    "explanation": "“İnsanoğlu”, René Magritte tarafından yapılmıştır.",
+    "factKey": "manual-art:21",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Campbell'ın Çorba Konserveleri” adlı eserin sanatçısı kimdir?",
+    "correct": "Andy Warhol",
+    "wrong": [
+      "Pierre-Auguste Renoir",
+      "Katsushika Hokusai",
+      "Edward Hopper"
+    ],
+    "explanation": "“Campbell'ın Çorba Konserveleri”, Andy Warhol tarafından yapılmıştır.",
+    "factKey": "manual-art:22",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Olympia” adlı eserin sanatçısı kimdir?",
+    "correct": "Édouard Manet",
+    "wrong": [
+      "Katsushika Hokusai",
+      "Edward Hopper",
+      "Caspar David Friedrich"
+    ],
+    "explanation": "“Olympia”, Édouard Manet tarafından yapılmıştır.",
+    "factKey": "manual-art:23",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Kırda Öğle Yemeği” adlı eserin sanatçısı kimdir?",
+    "correct": "Édouard Manet",
+    "wrong": [
+      "Edward Hopper",
+      "Caspar David Friedrich",
+      "Henri Matisse"
+    ],
+    "explanation": "“Kırda Öğle Yemeği”, Édouard Manet tarafından yapılmıştır.",
+    "factKey": "manual-art:24",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Moulin de la Galette'te Dans” adlı eserin sanatçısı kimdir?",
+    "correct": "Pierre-Auguste Renoir",
+    "wrong": [
+      "Caspar David Friedrich",
+      "Henri Matisse",
+      "John Constable"
+    ],
+    "explanation": "“Moulin de la Galette'te Dans”, Pierre-Auguste Renoir tarafından yapılmıştır.",
+    "factKey": "manual-art:25",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Kanagawa Oki Nami Ura” adlı eserin sanatçısı kimdir?",
+    "correct": "Katsushika Hokusai",
+    "wrong": [
+      "Henri Matisse",
+      "John Constable",
+      "J. M. W. Turner"
+    ],
+    "explanation": "“Kanagawa Oki Nami Ura”, Katsushika Hokusai tarafından yapılmıştır.",
+    "factKey": "manual-art:26",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Gece Kuşları” adlı eserin sanatçısı kimdir?",
+    "correct": "Edward Hopper",
+    "wrong": [
+      "John Constable",
+      "J. M. W. Turner",
+      "Jacques-Louis David"
+    ],
+    "explanation": "“Gece Kuşları”, Edward Hopper tarafından yapılmıştır.",
+    "factKey": "manual-art:27",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Sis Denizi Üzerindeki Gezgin” adlı eserin sanatçısı kimdir?",
+    "correct": "Caspar David Friedrich",
+    "wrong": [
+      "J. M. W. Turner",
+      "Jacques-Louis David",
+      "Francisco Goya"
+    ],
+    "explanation": "“Sis Denizi Üzerindeki Gezgin”, Caspar David Friedrich tarafından yapılmıştır.",
+    "factKey": "manual-art:28",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Dans” adlı eserin sanatçısı kimdir?",
+    "correct": "Henri Matisse",
+    "wrong": [
+      "Jacques-Louis David",
+      "Francisco Goya",
+      "Théodore Géricault"
+    ],
+    "explanation": "“Dans”, Henri Matisse tarafından yapılmıştır.",
+    "factKey": "manual-art:29",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Avignonlu Kızlar” adlı eserin sanatçısı kimdir?",
+    "correct": "Pablo Picasso",
+    "wrong": [
+      "Francisco Goya",
+      "Théodore Géricault",
+      "Paul Cézanne"
+    ],
+    "explanation": "“Avignonlu Kızlar”, Pablo Picasso tarafından yapılmıştır.",
+    "factKey": "manual-art:30",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Saman Arabası” adlı eserin sanatçısı kimdir?",
+    "correct": "John Constable",
+    "wrong": [
+      "Théodore Géricault",
+      "Paul Cézanne",
+      "Piet Mondrian"
+    ],
+    "explanation": "“Saman Arabası”, John Constable tarafından yapılmıştır.",
+    "factKey": "manual-art:31",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Savaşan Temeraire” adlı eserin sanatçısı kimdir?",
+    "correct": "J. M. W. Turner",
+    "wrong": [
+      "Paul Cézanne",
+      "Piet Mondrian",
+      "Jackson Pollock"
+    ],
+    "explanation": "“Savaşan Temeraire”, J. M. W. Turner tarafından yapılmıştır.",
+    "factKey": "manual-art:32",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Horatius Kardeşlerin Yemini” adlı eserin sanatçısı kimdir?",
+    "correct": "Jacques-Louis David",
+    "wrong": [
+      "Piet Mondrian",
+      "Jackson Pollock",
+      "Andrew Wyeth"
+    ],
+    "explanation": "“Horatius Kardeşlerin Yemini”, Jacques-Louis David tarafından yapılmıştır.",
+    "factKey": "manual-art:33",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Marat'nın Ölümü” adlı eserin sanatçısı kimdir?",
+    "correct": "Jacques-Louis David",
+    "wrong": [
+      "Jackson Pollock",
+      "Andrew Wyeth",
+      "Artemisia Gentileschi"
+    ],
+    "explanation": "“Marat'nın Ölümü”, Jacques-Louis David tarafından yapılmıştır.",
+    "factKey": "manual-art:34",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Çocuğunu Yiyen Satürn” adlı eserin sanatçısı kimdir?",
+    "correct": "Francisco Goya",
+    "wrong": [
+      "Andrew Wyeth",
+      "Artemisia Gentileschi",
+      "Anish Kapoor"
+    ],
+    "explanation": "“Çocuğunu Yiyen Satürn”, Francisco Goya tarafından yapılmıştır.",
+    "factKey": "manual-art:35",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“3 Mayıs 1808” adlı eserin sanatçısı kimdir?",
+    "correct": "Francisco Goya",
+    "wrong": [
+      "Artemisia Gentileschi",
+      "Anish Kapoor",
+      "Jeff Koons"
+    ],
+    "explanation": "“3 Mayıs 1808”, Francisco Goya tarafından yapılmıştır.",
+    "factKey": "manual-art:36",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Medusa'nın Salı” adlı eserin sanatçısı kimdir?",
+    "correct": "Théodore Géricault",
+    "wrong": [
+      "Leonardo da Vinci",
+      "Vincent van Gogh",
+      "Pablo Picasso"
+    ],
+    "explanation": "“Medusa'nın Salı”, Théodore Géricault tarafından yapılmıştır.",
+    "factKey": "manual-art:37",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“İzlenim: Gün Doğumu” adlı eserin sanatçısı kimdir?",
+    "correct": "Claude Monet",
+    "wrong": [
+      "Vincent van Gogh",
+      "Pablo Picasso",
+      "Edvard Munch"
+    ],
+    "explanation": "“İzlenim: Gün Doğumu”, Claude Monet tarafından yapılmıştır.",
+    "factKey": "manual-art:38",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Kâğıt Oynayanlar” adlı eserin sanatçısı kimdir?",
+    "correct": "Paul Cézanne",
+    "wrong": [
+      "Pablo Picasso",
+      "Edvard Munch",
+      "Johannes Vermeer"
+    ],
+    "explanation": "“Kâğıt Oynayanlar”, Paul Cézanne tarafından yapılmıştır.",
+    "factKey": "manual-art:39",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Kırmızı Üzüm Bağı” adlı eserin sanatçısı kimdir?",
+    "correct": "Vincent van Gogh",
+    "wrong": [
+      "Johannes Vermeer",
+      "Michelangelo",
+      "Salvador Dalí"
+    ],
+    "explanation": "“Kırmızı Üzüm Bağı”, Vincent van Gogh tarafından yapılmıştır.",
+    "factKey": "manual-art:40",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Broadway Boogie Woogie” adlı eserin sanatçısı kimdir?",
+    "correct": "Piet Mondrian",
+    "wrong": [
+      "Johannes Vermeer",
+      "Michelangelo",
+      "Salvador Dalí"
+    ],
+    "explanation": "“Broadway Boogie Woogie”, Piet Mondrian tarafından yapılmıştır.",
+    "factKey": "manual-art:41",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“No. 5, 1948” adlı eserin sanatçısı kimdir?",
+    "correct": "Jackson Pollock",
+    "wrong": [
+      "Michelangelo",
+      "Salvador Dalí",
+      "Diego Velázquez"
+    ],
+    "explanation": "“No. 5, 1948”, Jackson Pollock tarafından yapılmıştır.",
+    "factKey": "manual-art:42",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“İmgelerin İhaneti” adlı eserin sanatçısı kimdir?",
+    "correct": "René Magritte",
+    "wrong": [
+      "Salvador Dalí",
+      "Diego Velázquez",
+      "Rembrandt"
+    ],
+    "explanation": "“İmgelerin İhaneti”, René Magritte tarafından yapılmıştır.",
+    "factKey": "manual-art:43",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Christina'nın Dünyası” adlı eserin sanatçısı kimdir?",
+    "correct": "Andrew Wyeth",
+    "wrong": [
+      "Diego Velázquez",
+      "Rembrandt",
+      "Sandro Botticelli"
+    ],
+    "explanation": "“Christina'nın Dünyası”, Andrew Wyeth tarafından yapılmıştır.",
+    "factKey": "manual-art:44",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“İlkbahar” adlı eserin sanatçısı kimdir?",
+    "correct": "Sandro Botticelli",
+    "wrong": [
+      "Rembrandt",
+      "Grant Wood",
+      "Claude Monet"
+    ],
+    "explanation": "“İlkbahar”, Sandro Botticelli tarafından yapılmıştır.",
+    "factKey": "manual-art:45",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Holofernes'in Başını Kesen Judith” adlı eserin sanatçısı kimdir?",
+    "correct": "Artemisia Gentileschi",
+    "wrong": [
+      "Sandro Botticelli",
+      "Grant Wood",
+      "Claude Monet"
+    ],
+    "explanation": "“Holofernes'in Başını Kesen Judith”, Artemisia Gentileschi tarafından yapılmıştır.",
+    "factKey": "manual-art:46",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Gri ve Siyah Düzenleme No. 1” adlı eserin sanatçısı kimdir?",
+    "correct": "James McNeill Whistler",
+    "wrong": [
+      "Grant Wood",
+      "Claude Monet",
+      "Auguste Rodin"
+    ],
+    "explanation": "“Gri ve Siyah Düzenleme No. 1”, James McNeill Whistler tarafından yapılmıştır.",
+    "factKey": "manual-art:47",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Adele Bloch-Bauer I” adlı eserin sanatçısı kimdir?",
+    "correct": "Gustav Klimt",
+    "wrong": [
+      "Claude Monet",
+      "Auguste Rodin",
+      "Jan van Eyck"
+    ],
+    "explanation": "“Adele Bloch-Bauer I”, Gustav Klimt tarafından yapılmıştır.",
+    "factKey": "manual-art:48",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Cloud Gate” adlı eserin sanatçısı kimdir?",
+    "correct": "Anish Kapoor",
+    "wrong": [
+      "Auguste Rodin",
+      "Gustav Klimt",
+      "Jan van Eyck"
+    ],
+    "explanation": "“Cloud Gate”, Anish Kapoor tarafından yapılmıştır.",
+    "factKey": "manual-art:49",
+    "reviewed": false
+  },
+  {
+    "category": "Sanat",
+    "prompt": "“Balloon Dog” adlı eserin sanatçısı kimdir?",
+    "correct": "Jeff Koons",
+    "wrong": [
+      "Gustav Klimt",
+      "Jan van Eyck",
+      "Eugène Delacroix"
+    ],
+    "explanation": "“Balloon Dog”, Jeff Koons tarafından yapılmıştır.",
+    "factKey": "manual-art:50",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Güneş Sistemi'nin en büyük gezegeni hangisidir?",
+    "correct": "Jüpiter",
+    "wrong": [
+      "Satürn",
+      "Dünya",
+      "Neptün"
+    ],
+    "explanation": "Jüpiter, Güneş Sistemi'nin en büyük gezegenidir.",
+    "factKey": "manual-nature:1",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Güneş'e en yakın gezegen hangisidir?",
+    "correct": "Merkür",
+    "wrong": [
+      "Venüs",
+      "Dünya",
+      "Mars"
+    ],
+    "explanation": "Merkür, Güneş'e en yakın gezegendir.",
+    "factKey": "manual-nature:2",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Halkaları en belirgin gezegen hangisidir?",
+    "correct": "Satürn",
+    "wrong": [
+      "Mars",
+      "Venüs",
+      "Merkür"
+    ],
+    "explanation": "Satürn geniş ve belirgin halka sistemiyle tanınır.",
+    "factKey": "manual-nature:3",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünya'nın doğal uydusunun adı nedir?",
+    "correct": "Ay",
+    "wrong": [
+      "Titan",
+      "Europa",
+      "Triton"
+    ],
+    "explanation": "Ay, Dünya'nın tek doğal uydusudur.",
+    "factKey": "manual-nature:4",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Kızıl Gezegen olarak bilinen gezegen hangisidir?",
+    "correct": "Mars",
+    "wrong": [
+      "Venüs",
+      "Jüpiter",
+      "Uranüs"
+    ],
+    "explanation": "Mars, yüzeyindeki demir oksit nedeniyle kızıl görünür.",
+    "factKey": "manual-nature:5",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Güneş Sistemi'nin en sıcak gezegeni hangisidir?",
+    "correct": "Venüs",
+    "wrong": [
+      "Merkür",
+      "Mars",
+      "Jüpiter"
+    ],
+    "explanation": "Venüs'ün yoğun atmosferi güçlü sera etkisi oluşturur.",
+    "factKey": "manual-nature:6",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Eksenine neredeyse yan yatmış biçimde dönen gezegen hangisidir?",
+    "correct": "Uranüs",
+    "wrong": [
+      "Merkür",
+      "Dünya",
+      "Mars"
+    ],
+    "explanation": "Uranüs yaklaşık 98 derecelik eksen eğikliğine sahiptir.",
+    "factKey": "manual-nature:7",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Güneş Sistemi'nde bilinen en büyük yanardağ Olympus Mons hangi gezegendedir?",
+    "correct": "Mars",
+    "wrong": [
+      "Venüs",
+      "Dünya",
+      "Merkür"
+    ],
+    "explanation": "Olympus Mons, Mars yüzeyinde yer alır.",
+    "factKey": "manual-nature:8",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünya atmosferinde en çok bulunan gaz hangisidir?",
+    "correct": "Azot",
+    "wrong": [
+      "Oksijen",
+      "Argon",
+      "Karbondioksit"
+    ],
+    "explanation": "Kuru havanın yaklaşık yüzde 78'i azottur.",
+    "factKey": "manual-nature:9",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Fotosentez sırasında bitkilerin atmosferden aldığı gaz hangisidir?",
+    "correct": "Karbondioksit",
+    "wrong": [
+      "Oksijen",
+      "Azot",
+      "Helyum"
+    ],
+    "explanation": "Bitkiler fotosentezde karbondioksiti kullanır.",
+    "factKey": "manual-nature:10",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Suyun kimyasal formülü hangisidir?",
+    "correct": "H₂O",
+    "wrong": [
+      "CO₂",
+      "O₂",
+      "NaCl"
+    ],
+    "explanation": "Bir su molekülü iki hidrojen ve bir oksijen atomundan oluşur.",
+    "factKey": "manual-nature:11",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünya'nın en büyük okyanusu hangisidir?",
+    "correct": "Pasifik Okyanusu",
+    "wrong": [
+      "Atlas Okyanusu",
+      "Hint Okyanusu",
+      "Arktik Okyanusu"
+    ],
+    "explanation": "Pasifik, yüzölçümü bakımından en büyük okyanustur.",
+    "factKey": "manual-nature:12",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünya'nın en derin okyanus çukuru hangisidir?",
+    "correct": "Mariana Çukuru",
+    "wrong": [
+      "Java Çukuru",
+      "Porto Riko Çukuru",
+      "Tonga Çukuru"
+    ],
+    "explanation": "Bilinen en derin okyanus noktası Mariana Çukuru'ndadır.",
+    "factKey": "manual-nature:13",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Karaların en yüksek dağı hangisidir?",
+    "correct": "Everest",
+    "wrong": [
+      "K2",
+      "Kangchenjunga",
+      "Lhotse"
+    ],
+    "explanation": "Everest deniz seviyesine göre en yüksek dağdır.",
+    "factKey": "manual-nature:14",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünyanın en büyük sıcak çölü hangisidir?",
+    "correct": "Sahra",
+    "wrong": [
+      "Gobi",
+      "Kalahari",
+      "Atacama"
+    ],
+    "explanation": "Sahra, dünyanın en büyük sıcak çölüdür.",
+    "factKey": "manual-nature:15",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Mercan resiflerini oluşturan temel canlı grubu hangisidir?",
+    "correct": "Mercan polipleri",
+    "wrong": [
+      "Deniz yosunları",
+      "Süngerler",
+      "Denizyıldızları"
+    ],
+    "explanation": "Resiflerin iskelet yapısını koloniler hâlindeki mercan polipleri üretir.",
+    "factKey": "manual-nature:16",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Yarasalar hangi omurgalı sınıfına aittir?",
+    "correct": "Memeliler",
+    "wrong": [
+      "Kuşlar",
+      "Sürüngenler",
+      "İki yaşamlılar"
+    ],
+    "explanation": "Yarasalar uçabilen memelilerdir.",
+    "factKey": "manual-nature:17",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Penguenler hangi hayvan sınıfına aittir?",
+    "correct": "Kuşlar",
+    "wrong": [
+      "Memeliler",
+      "Balıklar",
+      "Sürüngenler"
+    ],
+    "explanation": "Penguenler uçamayan ancak yüzmeye uyum sağlamış kuşlardır.",
+    "factKey": "manual-nature:18",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Balinalar nasıl solunum yapar?",
+    "correct": "Akciğerle",
+    "wrong": [
+      "Solungaçla",
+      "Deriyle",
+      "Trakeyle"
+    ],
+    "explanation": "Balinalar memelidir ve akciğerleriyle hava solur.",
+    "factKey": "manual-nature:19",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Kurbağalar hangi omurgalı sınıfındadır?",
+    "correct": "İki yaşamlılar",
+    "wrong": [
+      "Sürüngenler",
+      "Kuşlar",
+      "Memeliler"
+    ],
+    "explanation": "Kurbağalar Amphibia yani iki yaşamlılar sınıfındadır.",
+    "factKey": "manual-nature:20",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Ahtapotların kaç kalbi vardır?",
+    "correct": "3",
+    "wrong": [
+      "1",
+      "2",
+      "4"
+    ],
+    "explanation": "Ahtapotlarda iki solungaç kalbi ve bir sistemik kalp bulunur.",
+    "factKey": "manual-nature:21",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Örümceklerin kaç bacağı vardır?",
+    "correct": "8",
+    "wrong": [
+      "6",
+      "10",
+      "12"
+    ],
+    "explanation": "Örümcekler sekiz bacaklı eklembacaklılardır.",
+    "factKey": "manual-nature:22",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Böceklerin kaç bacağı vardır?",
+    "correct": "6",
+    "wrong": [
+      "4",
+      "8",
+      "10"
+    ],
+    "explanation": "Böceklerin göğüs bölümüne bağlı üç çift bacağı vardır.",
+    "factKey": "manual-nature:23",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Arı kolonisinde yumurtlayan dişi hangisidir?",
+    "correct": "Kraliçe arı",
+    "wrong": [
+      "İşçi arı",
+      "Erkek arı",
+      "Gözcü arı"
+    ],
+    "explanation": "Kolonide yumurtlama görevini kraliçe arı üstlenir.",
+    "factKey": "manual-nature:24",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "İpek doğal olarak hangi canlının kozasından elde edilir?",
+    "correct": "İpek böceği",
+    "wrong": [
+      "Bal arısı",
+      "Uğur böceği",
+      "Karınca"
+    ],
+    "explanation": "Ticari ipeğin başlıca kaynağı ipek böceği kozasıdır.",
+    "factKey": "manual-nature:25",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Kutup ayıları doğal olarak hangi bölgede yaşar?",
+    "correct": "Arktik",
+    "wrong": [
+      "Antarktika",
+      "Sahra",
+      "Amazon"
+    ],
+    "explanation": "Kutup ayıları Kuzey Kutbu çevresindeki Arktik bölgede yaşar.",
+    "factKey": "manual-nature:26",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "İmparator penguenler doğal olarak hangi kıtada yaşar?",
+    "correct": "Antarktika",
+    "wrong": [
+      "Asya",
+      "Afrika",
+      "Avrupa"
+    ],
+    "explanation": "İmparator penguen Antarktika'ya özgüdür.",
+    "factKey": "manual-nature:27",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dev pandaların temel besini hangisidir?",
+    "correct": "Bambu",
+    "wrong": [
+      "Okaliptüs",
+      "Kaktüs",
+      "Çam kozalağı"
+    ],
+    "explanation": "Dev pandaların beslenmesinin büyük bölümünü bambu oluşturur.",
+    "factKey": "manual-nature:28",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Koalaların temel besini hangisidir?",
+    "correct": "Okaliptüs yaprakları",
+    "wrong": [
+      "Bambu",
+      "Çimen",
+      "Meyve"
+    ],
+    "explanation": "Koalalar başlıca belirli okaliptüs türlerinin yapraklarını yer.",
+    "factKey": "manual-nature:29",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünyanın yaşayan en büyük hayvanı hangisidir?",
+    "correct": "Mavi balina",
+    "wrong": [
+      "Afrika fili",
+      "Balina köpekbalığı",
+      "Zürafa"
+    ],
+    "explanation": "Mavi balina bilinen en büyük yaşayan hayvandır.",
+    "factKey": "manual-nature:30",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Karada yaşayan en büyük hayvan hangisidir?",
+    "correct": "Afrika savan fili",
+    "wrong": [
+      "Beyaz gergedan",
+      "Su aygırı",
+      "Zürafa"
+    ],
+    "explanation": "Afrika savan fili yaşayan en büyük kara hayvanıdır.",
+    "factKey": "manual-nature:31",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Yaşayan en uzun boylu kara hayvanı hangisidir?",
+    "correct": "Zürafa",
+    "wrong": [
+      "Afrika fili",
+      "Deve",
+      "Gergedan"
+    ],
+    "explanation": "Zürafa yaşayan kara hayvanları içinde en uzun boylu olanıdır.",
+    "factKey": "manual-nature:32",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Uçabilen tek memeli grubu hangisidir?",
+    "correct": "Yarasalar",
+    "wrong": [
+      "Uçan sincaplar",
+      "Şeker planörleri",
+      "Lemurlar"
+    ],
+    "explanation": "Gerçek anlamda sürekli uçuş yapabilen memeliler yarasalardır.",
+    "factKey": "manual-nature:33",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Dünya'nın katı dış tabakasına ne ad verilir?",
+    "correct": "Yerkabuğu",
+    "wrong": [
+      "Manto",
+      "Dış çekirdek",
+      "İç çekirdek"
+    ],
+    "explanation": "Yerkabuğu Dünya'nın en dıştaki katı katmanıdır.",
+    "factKey": "manual-nature:34",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Depremleri kaydeden cihaza ne ad verilir?",
+    "correct": "Sismograf",
+    "wrong": [
+      "Barometre",
+      "Anemometre",
+      "Higrometre"
+    ],
+    "explanation": "Sismograf yer hareketlerini kaydeder.",
+    "factKey": "manual-nature:35",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Hava basıncını ölçen araç hangisidir?",
+    "correct": "Barometre",
+    "wrong": [
+      "Termometre",
+      "Anemometre",
+      "Sismograf"
+    ],
+    "explanation": "Barometre atmosfer basıncını ölçer.",
+    "factKey": "manual-nature:36",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Rüzgâr hızını ölçen araç hangisidir?",
+    "correct": "Anemometre",
+    "wrong": [
+      "Barometre",
+      "Higrometre",
+      "Plüviyometre"
+    ],
+    "explanation": "Anemometre rüzgâr hızını ölçer.",
+    "factKey": "manual-nature:37",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Havadaki nemi ölçen araç hangisidir?",
+    "correct": "Higrometre",
+    "wrong": [
+      "Barometre",
+      "Termometre",
+      "Sismograf"
+    ],
+    "explanation": "Higrometre havanın nemini ölçer.",
+    "factKey": "manual-nature:38",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Yağış miktarını ölçen araç hangisidir?",
+    "correct": "Plüviyometre",
+    "wrong": [
+      "Anemometre",
+      "Barometre",
+      "Altimetre"
+    ],
+    "explanation": "Plüviyometre belirli alana düşen yağış miktarını ölçer.",
+    "factKey": "manual-nature:39",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Kayaçların parçalanıp taşınmasına verilen genel ad hangisidir?",
+    "correct": "Erozyon",
+    "wrong": [
+      "Yoğuşma",
+      "Fotosentez",
+      "Süblimleşme"
+    ],
+    "explanation": "Erozyon toprak ve kaya malzemesinin aşınıp taşınmasıdır.",
+    "factKey": "manual-nature:40",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Magma yeryüzüne çıktığında ne ad alır?",
+    "correct": "Lav",
+    "wrong": [
+      "Granit",
+      "Bazalt",
+      "Tüf"
+    ],
+    "explanation": "Yeraltındaki magma yüzeye ulaştığında lav adını alır.",
+    "factKey": "manual-nature:41",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Okyanuslardaki gelgitlerin başlıca gök cismi kaynağı hangisidir?",
+    "correct": "Ay",
+    "wrong": [
+      "Mars",
+      "Venüs",
+      "Jüpiter"
+    ],
+    "explanation": "Ay'ın kütleçekimi Dünya'daki gelgitlerin başlıca nedenidir.",
+    "factKey": "manual-nature:42",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Bitkilerde suyu kökten yapraklara taşıyan doku hangisidir?",
+    "correct": "Ksilem",
+    "wrong": [
+      "Floem",
+      "Epidermis",
+      "Kambiyum"
+    ],
+    "explanation": "Ksilem su ve mineralleri kökten üst bölümlere taşır.",
+    "factKey": "manual-nature:43",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Bitkilerde üretilen şekeri taşıyan doku hangisidir?",
+    "correct": "Floem",
+    "wrong": [
+      "Ksilem",
+      "Kütikula",
+      "Meristem"
+    ],
+    "explanation": "Floem fotosentez ürünlerini bitkinin diğer bölümlerine taşır.",
+    "factKey": "manual-nature:44",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Tohumlu bitkilerde erkek üreme hücrelerini taşıyan yapı hangisidir?",
+    "correct": "Polen",
+    "wrong": [
+      "Nektar",
+      "Klorofil",
+      "Stoma"
+    ],
+    "explanation": "Polen taneleri erkek gametleri taşır.",
+    "factKey": "manual-nature:45",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Mantarlar besinlerini nasıl elde eder?",
+    "correct": "Dışarıda sindirip emerek",
+    "wrong": [
+      "Fotosentez yaparak",
+      "Işık üreterek",
+      "Kemosentezle"
+    ],
+    "explanation": "Mantarlar enzim salgılar, organik maddeyi dışarıda sindirip emer.",
+    "factKey": "manual-nature:46",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Liken hangi iki canlı grubunun ortak yaşamıdır?",
+    "correct": "Mantar ve alg ya da siyanobakteri",
+    "wrong": [
+      "Bitki ve hayvan",
+      "Bakteri ve virüs",
+      "Böcek ve mantar"
+    ],
+    "explanation": "Liken, mantar ile fotosentetik bir ortağın simbiyotik birlikteliğidir.",
+    "factKey": "manual-nature:47",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Ozon tabakası atmosferin hangi katmanında yoğunlaşır?",
+    "correct": "Stratosfer",
+    "wrong": [
+      "Troposfer",
+      "Mezosfer",
+      "Termosfer"
+    ],
+    "explanation": "Atmosferik ozonun büyük kısmı stratosferdedir.",
+    "factKey": "manual-nature:48",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Kuzey ışıklarının bilimsel adı hangisidir?",
+    "correct": "Aurora borealis",
+    "wrong": [
+      "Aurora australis",
+      "Albedo",
+      "Korona"
+    ],
+    "explanation": "Kuzey yarımküredeki kutup ışıkları aurora borealis olarak adlandırılır.",
+    "factKey": "manual-nature:49",
+    "reviewed": false
+  },
+  {
+    "category": "Doğa",
+    "prompt": "Güney ışıklarının bilimsel adı hangisidir?",
+    "correct": "Aurora australis",
+    "wrong": [
+      "Aurora borealis",
+      "Parhelion",
+      "Korona"
+    ],
+    "explanation": "Güney yarımküredeki kutup ışıkları aurora australis olarak adlandırılır.",
+    "factKey": "manual-nature:50",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Bir futbol takımında sahada aynı anda kaç oyuncu bulunur?",
+    "correct": "11",
+    "wrong": [
+      "9",
+      "10",
+      "12"
+    ],
+    "explanation": "Futbolda bir takım kaleci dâhil on bir oyuncuyla sahaya çıkar.",
+    "factKey": "manual-sport:1",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Bir basketbol takımında sahada aynı anda kaç oyuncu bulunur?",
+    "correct": "5",
+    "wrong": [
+      "4",
+      "6",
+      "7"
+    ],
+    "explanation": "Basketbolda her takım sahada beş oyuncuyla yer alır.",
+    "factKey": "manual-sport:2",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Bir voleybol takımında sahada aynı anda kaç oyuncu bulunur?",
+    "correct": "6",
+    "wrong": [
+      "5",
+      "7",
+      "8"
+    ],
+    "explanation": "Salon voleybolunda her takım sahada altı oyuncuyla oynar.",
+    "factKey": "manual-sport:3",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Bir hentbol takımında sahada aynı anda kaç oyuncu bulunur?",
+    "correct": "7",
+    "wrong": [
+      "6",
+      "8",
+      "9"
+    ],
+    "explanation": "Hentbolda kaleci dâhil yedi oyuncu sahadadır.",
+    "factKey": "manual-sport:4",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Bir beyzbol takımında savunmada sahada kaç oyuncu bulunur?",
+    "correct": "9",
+    "wrong": [
+      "8",
+      "10",
+      "11"
+    ],
+    "explanation": "Beyzbolda savunma takımı dokuz oyuncudan oluşur.",
+    "factKey": "manual-sport:5",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Teniste sıfır puan hangi sözcükle ifade edilir?",
+    "correct": "Love",
+    "wrong": [
+      "Zero",
+      "Blank",
+      "Nil"
+    ],
+    "explanation": "Tenis skorunda sıfır puan love sözcüğüyle söylenir.",
+    "factKey": "manual-sport:6",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Teniste 40-40 skoruna ne ad verilir?",
+    "correct": "Deuce",
+    "wrong": [
+      "Break",
+      "Ace",
+      "Let"
+    ],
+    "explanation": "Her iki oyuncu da 40 puana ulaştığında skor deuce olur.",
+    "factKey": "manual-sport:7",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Teniste servis karşılanmadan sayı olursa buna ne denir?",
+    "correct": "Ace",
+    "wrong": [
+      "Rally",
+      "Volley",
+      "Slice"
+    ],
+    "explanation": "Rakibin dokunamadığı geçerli servis ace olarak adlandırılır.",
+    "factKey": "manual-sport:8",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Golfte bir deliği standart vuruş sayısından bir eksikle bitirmeye ne denir?",
+    "correct": "Birdie",
+    "wrong": [
+      "Bogey",
+      "Eagle",
+      "Par"
+    ],
+    "explanation": "Par değerinden bir eksik skor birdie'dir.",
+    "factKey": "manual-sport:9",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Golfte bir deliği standart vuruş sayısından bir fazla bitirmeye ne denir?",
+    "correct": "Bogey",
+    "wrong": [
+      "Birdie",
+      "Eagle",
+      "Ace"
+    ],
+    "explanation": "Par değerinden bir fazla skor bogey'dir.",
+    "factKey": "manual-sport:10",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Boksta maç alanına ne ad verilir?",
+    "correct": "Ring",
+    "wrong": [
+      "Kort",
+      "Pist",
+      "Saha"
+    ],
+    "explanation": "Boks karşılaşmaları ring adı verilen alanda yapılır.",
+    "factKey": "manual-sport:11",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Judo hangi ülkede geliştirilmiştir?",
+    "correct": "Japonya",
+    "wrong": [
+      "Çin",
+      "Güney Kore",
+      "Tayland"
+    ],
+    "explanation": "Judo, Jigoro Kano tarafından Japonya'da geliştirilmiştir.",
+    "factKey": "manual-sport:12",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Tekvando hangi ülkede ortaya çıkmıştır?",
+    "correct": "Güney Kore",
+    "wrong": [
+      "Japonya",
+      "Çin",
+      "Moğolistan"
+    ],
+    "explanation": "Tekvando Kore kökenli bir dövüş sporudur.",
+    "factKey": "manual-sport:13",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Sumo güreşi hangi ülkeyle özdeşleşmiştir?",
+    "correct": "Japonya",
+    "wrong": [
+      "Hindistan",
+      "Çin",
+      "Rusya"
+    ],
+    "explanation": "Sumo Japonya'nın geleneksel güreş sporudur.",
+    "factKey": "manual-sport:14",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Tour de France hangi spor dalının yarışıdır?",
+    "correct": "Bisiklet",
+    "wrong": [
+      "Otomobil",
+      "Atletizm",
+      "Kayak"
+    ],
+    "explanation": "Tour de France çok etaplı bir yol bisikleti yarışıdır.",
+    "factKey": "manual-sport:15",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Wimbledon hangi spor dalının turnuvasıdır?",
+    "correct": "Tenis",
+    "wrong": [
+      "Golf",
+      "Kriket",
+      "Badminton"
+    ],
+    "explanation": "Wimbledon dört büyük tenis turnuvasından biridir.",
+    "factKey": "manual-sport:16",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Stanley Kupası hangi spor dalıyla ilişkilidir?",
+    "correct": "Buz hokeyi",
+    "wrong": [
+      "Basketbol",
+      "Beyzbol",
+      "Amerikan futbolu"
+    ],
+    "explanation": "Stanley Kupası buz hokeyinin NHL şampiyonuna verilir.",
+    "factKey": "manual-sport:17",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Super Bowl hangi sporun final karşılaşmasıdır?",
+    "correct": "Amerikan futbolu",
+    "wrong": [
+      "Beyzbol",
+      "Basketbol",
+      "Buz hokeyi"
+    ],
+    "explanation": "Super Bowl, NFL sezonunun şampiyonluk maçıdır.",
+    "factKey": "manual-sport:18",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Giro d'Italia hangi spor dalında düzenlenir?",
+    "correct": "Bisiklet",
+    "wrong": [
+      "Motosiklet",
+      "Otomobil",
+      "Koşu"
+    ],
+    "explanation": "Giro d'Italia büyük yol bisikleti turlarından biridir.",
+    "factKey": "manual-sport:19",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Bir maratonun resmî uzunluğu kaç kilometredir?",
+    "correct": "42,195 km",
+    "wrong": [
+      "40 km",
+      "41,5 km",
+      "45 km"
+    ],
+    "explanation": "Standart maraton mesafesi 42 kilometre 195 metredir.",
+    "factKey": "manual-sport:20",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Olimpik atletizm pistinin standart tur uzunluğu kaç metredir?",
+    "correct": "400 metre",
+    "wrong": [
+      "200 metre",
+      "300 metre",
+      "500 metre"
+    ],
+    "explanation": "Açık hava standart atletizm pistinin bir turu 400 metredir.",
+    "factKey": "manual-sport:21",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Dekatlonda kaç farklı yarışma vardır?",
+    "correct": "10",
+    "wrong": [
+      "8",
+      "9",
+      "12"
+    ],
+    "explanation": "Dekatlon on atletizm yarışmasından oluşur.",
+    "factKey": "manual-sport:22",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Heptatlonda kaç farklı yarışma vardır?",
+    "correct": "7",
+    "wrong": [
+      "6",
+      "8",
+      "10"
+    ],
+    "explanation": "Heptatlon yedi atletizm yarışmasından oluşur.",
+    "factKey": "manual-sport:23",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Triatlonda hangi üç branş birlikte yapılır?",
+    "correct": "Yüzme, bisiklet ve koşu",
+    "wrong": [
+      "Koşu, kürek ve kayak",
+      "Yüzme, jimnastik ve koşu",
+      "Bisiklet, atıcılık ve koşu"
+    ],
+    "explanation": "Triatlon sırasıyla yüzme, bisiklet ve koşudan oluşur.",
+    "factKey": "manual-sport:24",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Biatlon hangi iki branşı birleştirir?",
+    "correct": "Kayaklı koşu ve tüfekle atış",
+    "wrong": [
+      "Kayakla atlama ve koşu",
+      "Paten ve okçuluk",
+      "Kızak ve atış"
+    ],
+    "explanation": "Biatlon kayaklı koşu ile tüfekle hedef atışını birleştirir.",
+    "factKey": "manual-sport:25",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Modern pentatlonda kaç branş vardır?",
+    "correct": "5",
+    "wrong": [
+      "4",
+      "6",
+      "7"
+    ],
+    "explanation": "Pentatlon sözcüğü beş yarışmayı ifade eder.",
+    "factKey": "manual-sport:26",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Badmintonda kullanılan tüylü oyun aracına ne ad verilir?",
+    "correct": "Mekik",
+    "wrong": [
+      "Disk",
+      "Top",
+      "Pak"
+    ],
+    "explanation": "Badminton raketle mekik üzerinden oynanır.",
+    "factKey": "manual-sport:27",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Buz hokeyinde kullanılan diskin adı nedir?",
+    "correct": "Pak",
+    "wrong": [
+      "Mekik",
+      "Puck topu",
+      "Disket"
+    ],
+    "explanation": "Buz hokeyindeki sert kauçuk disk pak olarak adlandırılır.",
+    "factKey": "manual-sport:28",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Curlingde hedef alanına ne ad verilir?",
+    "correct": "House",
+    "wrong": [
+      "Ring",
+      "Court",
+      "Zone"
+    ],
+    "explanation": "Curling pistinin dairesel hedef bölgesi house olarak adlandırılır.",
+    "factKey": "manual-sport:29",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Snooker masasında başlangıçta kaç kırmızı top bulunur?",
+    "correct": "15",
+    "wrong": [
+      "12",
+      "14",
+      "16"
+    ],
+    "explanation": "Standart snooker diziliminde on beş kırmızı top vardır.",
+    "factKey": "manual-sport:30",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Satranç tahtasında kaç kare vardır?",
+    "correct": "64",
+    "wrong": [
+      "48",
+      "72",
+      "81"
+    ],
+    "explanation": "Satranç tahtası sekize sekiz, toplam 64 kareden oluşur.",
+    "factKey": "manual-sport:31",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Satrançta her oyuncu oyuna kaç taşla başlar?",
+    "correct": "16",
+    "wrong": [
+      "12",
+      "14",
+      "18"
+    ],
+    "explanation": "Her oyuncunun başlangıçta on altı taşı vardır.",
+    "factKey": "manual-sport:32",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Satrançta L biçiminde hareket eden taş hangisidir?",
+    "correct": "At",
+    "wrong": [
+      "Fil",
+      "Kale",
+      "Vezir"
+    ],
+    "explanation": "At iki kare bir yönde ve bir kare dik yönde ilerler.",
+    "factKey": "manual-sport:33",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Satrançta yalnızca çapraz hareket eden taş hangisidir?",
+    "correct": "Fil",
+    "wrong": [
+      "Kale",
+      "At",
+      "Şah"
+    ],
+    "explanation": "Fil bulunduğu renk üzerindeki çaprazlarda ilerler.",
+    "factKey": "manual-sport:34",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Futbolda penaltı noktası kale çizgisinden kaç metre uzaktadır?",
+    "correct": "11 metre",
+    "wrong": [
+      "9 metre",
+      "10 metre",
+      "12 metre"
+    ],
+    "explanation": "Penaltı noktası kale çizgisinden 11 metre uzaklıktadır.",
+    "factKey": "manual-sport:35",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Futbolda bir devre kaç dakikadır?",
+    "correct": "45 dakika",
+    "wrong": [
+      "40 dakika",
+      "50 dakika",
+      "60 dakika"
+    ],
+    "explanation": "Standart futbol maçında iki devre de 45'er dakikadır.",
+    "factKey": "manual-sport:36",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Basketbolda serbest atış kaç sayı değerindedir?",
+    "correct": "1",
+    "wrong": [
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Başarılı bir serbest atış bir sayı kazandırır.",
+    "factKey": "manual-sport:37",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Basketbolda üç sayı çizgisinin gerisinden atılan basket kaç sayıdır?",
+    "correct": "3",
+    "wrong": [
+      "1",
+      "2",
+      "4"
+    ],
+    "explanation": "Çizginin gerisinden yapılan başarılı atış üç sayı değerindedir.",
+    "factKey": "manual-sport:38",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Voleybolda bir set genellikle kaç sayıda biter?",
+    "correct": "25",
+    "wrong": [
+      "15",
+      "21",
+      "30"
+    ],
+    "explanation": "İlk dört set en az iki sayı farkla 25 sayıda tamamlanır.",
+    "factKey": "manual-sport:39",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Voleybolda karar seti genellikle kaç sayıda biter?",
+    "correct": "15",
+    "wrong": [
+      "11",
+      "21",
+      "25"
+    ],
+    "explanation": "Beşinci set en az iki sayı farkla 15 sayıda tamamlanır.",
+    "factKey": "manual-sport:40",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Masa tenisinde bir set genellikle kaç sayıda biter?",
+    "correct": "11",
+    "wrong": [
+      "15",
+      "21",
+      "25"
+    ],
+    "explanation": "Masa tenisinde oyun en az iki sayı farkla 11 sayıda kazanılır.",
+    "factKey": "manual-sport:41",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Ragbi birliği takımında sahada kaç oyuncu bulunur?",
+    "correct": "15",
+    "wrong": [
+      "11",
+      "13",
+      "16"
+    ],
+    "explanation": "Ragbi birliğinde her takım on beş oyuncuyla oynar.",
+    "factKey": "manual-sport:42",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Yedili ragbide bir takımda sahada kaç oyuncu bulunur?",
+    "correct": "7",
+    "wrong": [
+      "6",
+      "8",
+      "9"
+    ],
+    "explanation": "Ragbi sevens formatında takımlar yedi oyuncudan oluşur.",
+    "factKey": "manual-sport:43",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Krikette bir takım kaç oyuncudan oluşur?",
+    "correct": "11",
+    "wrong": [
+      "9",
+      "10",
+      "12"
+    ],
+    "explanation": "Krikette her takım on bir oyuncudan oluşur.",
+    "factKey": "manual-sport:44",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Polo takımında sahada kaç oyuncu bulunur?",
+    "correct": "4",
+    "wrong": [
+      "5",
+      "6",
+      "7"
+    ],
+    "explanation": "Açık alan polosunda her takım dört oyuncuyla oynar.",
+    "factKey": "manual-sport:45",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Sutopu takımında havuzda aynı anda kaç oyuncu bulunur?",
+    "correct": "7",
+    "wrong": [
+      "6",
+      "8",
+      "9"
+    ],
+    "explanation": "Sutopunda kaleci dâhil yedi oyuncu havuzdadır.",
+    "factKey": "manual-sport:46",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Olimpiyat sembolünde kaç halka vardır?",
+    "correct": "5",
+    "wrong": [
+      "4",
+      "6",
+      "7"
+    ],
+    "explanation": "Olimpiyat sembolü birbirine geçmiş beş halkadan oluşur.",
+    "factKey": "manual-sport:47",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "İlk modern Olimpiyat Oyunları hangi şehirde düzenlendi?",
+    "correct": "Atina",
+    "wrong": [
+      "Paris",
+      "Londra",
+      "Roma"
+    ],
+    "explanation": "1896'daki ilk modern Olimpiyat Oyunları Atina'da yapıldı.",
+    "factKey": "manual-sport:48",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Olimpiyat meşalesi geleneği hangi antik ülkeyle ilişkilidir?",
+    "correct": "Yunanistan",
+    "wrong": [
+      "İtalya",
+      "Mısır",
+      "Fransa"
+    ],
+    "explanation": "Olimpiyat ateşi antik Olympia mirasına dayanır.",
+    "factKey": "manual-sport:49",
+    "reviewed": false
+  },
+  {
+    "category": "Spor",
+    "prompt": "Formula 1'de damalı bayrak neyi belirtir?",
+    "correct": "Yarışın bittiğini",
+    "wrong": [
+      "Güvenlik aracını",
+      "Diskalifiyeyi",
+      "Pistin kaygan olduğunu"
+    ],
+    "explanation": "Damalı bayrak yarışın veya seansın tamamlandığını bildirir.",
+    "factKey": "manual-sport:50",
+    "reviewed": false
+  }
+]
