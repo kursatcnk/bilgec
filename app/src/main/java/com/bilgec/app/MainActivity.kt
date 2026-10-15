@@ -116,6 +116,7 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
     private lateinit var preferences: AppPreferences
+    // İzin ekranından geri dönünce Compose tarafını yenilemek için kullanılıyor.
     private var refreshCounter by mutableIntStateOf(0)
     private var questionCount by mutableIntStateOf(0)
 
@@ -258,6 +259,7 @@ private fun BilGecApp(
     var stats by remember { mutableStateOf(preferences.todayStats()) }
 
     LaunchedEffect(Unit) {
+        // Sayaç ana ekranda geriden gelmesin diye saniyede bir güncelliyoruz.
         while (true) {
             elapsedMs = preferences.elapsedMs
             stats = preferences.todayStats()
@@ -267,7 +269,7 @@ private fun BilGecApp(
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
-        bottomBar = { PremiumBottomBar(page = page, onSelect = { page = it }) },
+        bottomBar = { BottomMenu(page = page, onSelect = { page = it }) },
     ) { padding ->
         when (page) {
             AppPage.HOME -> HomeScreen(
@@ -300,7 +302,7 @@ private fun BilGecApp(
 }
 
 @Composable
-private fun PremiumBottomBar(page: AppPage, onSelect: (AppPage) -> Unit) {
+private fun BottomMenu(page: AppPage, onSelect: (AppPage) -> Unit) {
     Surface(
         color = MaterialTheme.colorScheme.surface,
         shadowElevation = 14.dp,
@@ -349,7 +351,7 @@ private fun HomeScreen(
             .padding(horizontal = 20.dp, vertical = 18.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
-        BrandHeader()
+        AppHeader()
         Text(
             "Kaydırmadan önce\nbir şey öğren.",
             style = MaterialTheme.typography.displayLarge,
@@ -360,7 +362,7 @@ private fun HomeScreen(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
-        ProtectionCard(
+        TimerCard(
             enabled = preferences.trackingEnabled,
             canEnable = permissions.allGranted && preferences.selectedPackages.isNotEmpty(),
             elapsedMs = elapsedMs,
@@ -371,13 +373,13 @@ private fun HomeScreen(
         )
 
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            MetricCard(Icons.Default.School, stats.solved.toString(), "Bugün", Modifier.weight(1f))
-            MetricCard(Icons.Default.CheckCircle, stats.correct.toString(), "Doğru", Modifier.weight(1f))
-            MetricCard(Icons.Default.LocalFireDepartment, stats.streak.toString(), "Gün seri", Modifier.weight(1f))
+            SmallStatCard(Icons.Default.School, stats.solved.toString(), "Bugün", Modifier.weight(1f))
+            SmallStatCard(Icons.Default.CheckCircle, stats.correct.toString(), "Doğru", Modifier.weight(1f))
+            SmallStatCard(Icons.Default.LocalFireDepartment, stats.streak.toString(), "Gün seri", Modifier.weight(1f))
         }
 
         if (!permissions.allGranted) {
-            SectionTitle("KURULUM", "Üç küçük adım kaldı")
+            SectionHeading("KURULUM", "Üç küçük adım kaldı")
             PermissionCard(
                 icon = Icons.Default.Timer,
                 title = "Kullanım erişimi",
@@ -427,14 +429,14 @@ private fun HomeScreen(
 }
 
 @Composable
-private fun BrandHeader() {
+private fun AppHeader() {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
-            BrandMark(42.dp)
+            AppLogo(42.dp)
             Text("BilGeç", style = MaterialTheme.typography.titleLarge)
         }
         Surface(shape = CircleShape, color = MaterialTheme.colorScheme.surfaceVariant) {
@@ -449,7 +451,7 @@ private fun BrandHeader() {
 }
 
 @Composable
-private fun BrandMark(size: androidx.compose.ui.unit.Dp) {
+private fun AppLogo(size: androidx.compose.ui.unit.Dp) {
     Box(
         modifier = Modifier
             .size(size)
@@ -462,7 +464,7 @@ private fun BrandMark(size: androidx.compose.ui.unit.Dp) {
 }
 
 @Composable
-private fun ProtectionCard(
+private fun TimerCard(
     enabled: Boolean,
     canEnable: Boolean,
     elapsedMs: Long,
@@ -557,7 +559,7 @@ private fun ProtectionCard(
 }
 
 @Composable
-private fun MetricCard(icon: ImageVector, value: String, label: String, modifier: Modifier = Modifier) {
+private fun SmallStatCard(icon: ImageVector, value: String, label: String, modifier: Modifier = Modifier) {
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(22.dp),
@@ -573,7 +575,7 @@ private fun MetricCard(icon: ImageVector, value: String, label: String, modifier
 }
 
 @Composable
-private fun SectionTitle(kicker: String, title: String) {
+private fun SectionHeading(kicker: String, title: String) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(kicker, style = MaterialTheme.typography.labelMedium, color = BilGecRed)
         Text(title, style = MaterialTheme.typography.headlineSmall)
@@ -633,7 +635,7 @@ private fun AppsScreen(
             .padding(horizontal = 20.dp, vertical = 18.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
-        BrandHeader()
+        AppHeader()
         ScreenHeader(
             kicker = "ODAK ALANI",
             title = "Nerede mola\nvereceğini seç.",
@@ -746,7 +748,7 @@ private fun SettingsScreen(
             .padding(horizontal = 20.dp, vertical = 18.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        BrandHeader()
+        AppHeader()
         ScreenHeader(
             kicker = "KONTROL SENDE",
             title = "BilGeç'i sana\ngöre ayarla.",

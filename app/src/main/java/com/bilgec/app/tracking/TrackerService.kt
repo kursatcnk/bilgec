@@ -97,6 +97,7 @@ class TrackerService : Service() {
     private fun startTrackingLoop() {
         if (trackingJob?.isActive == true) return
 
+        // Android aktif uygulamayı anlık vermiyor. Kısa aralıklarla kontrol etmek gerekiyor.
         lastUsageQueryAt = System.currentTimeMillis() - initialLookbackMs
         updateForegroundPackage()
 
@@ -136,12 +137,14 @@ class TrackerService : Service() {
         if (!getSystemService(PowerManager::class.java).isInteractive) return
         if (foregroundPackage !in preferences.selectedPackages) return
 
+        // Sadece kullanıcının seçtiği uygulama ekrandayken süre ekleniyor.
         preferences.elapsedMs += delta
         if (preferences.elapsedMs >= preferences.intervalMs) prepareQuestion()
     }
 
     private fun prepareQuestion() {
         if (openingQuestion || preferences.awaitingQuestion) return
+        // Aynı anda iki soru ekranı açılmasın.
         openingQuestion = true
         preferences.awaitingQuestion = true
 

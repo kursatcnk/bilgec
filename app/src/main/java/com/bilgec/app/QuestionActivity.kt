@@ -98,6 +98,7 @@ class QuestionActivity : ComponentActivity() {
         lifecycleScope.launch {
             runCatching {
                 withContext(Dispatchers.IO) {
+                    // Servisin hazırladığı soru varsa onu aç, yoksa yeni bir tane seç.
                     val savedId = preferences.currentQuestionId
                     (if (savedId != AppPreferences.noQuestion) repository.byId(savedId) else null)
                         ?: repository.next(preferences.lastCategory).also {
@@ -121,6 +122,7 @@ class QuestionActivity : ComponentActivity() {
     }
 
     private fun continueToPreviousApp() {
+        // Sayaç sıfırlanıyor, bu ekran kapanınca kullanıcı kaldığı yere dönüyor.
         startService(Intent(this, TrackerService::class.java).setAction(TrackerService.ACTION_CONTINUE))
         finishAndRemoveTask()
     }

@@ -5,14 +5,18 @@ import com.bilgec.app.quiz.QuizQuestion
 
 class QuestionRepository(private val dao: QuestionDao) {
     suspend fun next(lastCategory: String): QuizQuestion {
-        val preferred = dao.unseenCandidates(lastCategory, candidateLimit)
-        val unseen = if (preferred.isNotEmpty()) preferred else dao.unseenCandidates("", candidateLimit)
-        val candidates = if (unseen.isNotEmpty()) {
-            unseen
-        } else {
-            dao.oldestCandidates(lastCategory, candidateLimit).ifEmpty {
-                dao.oldestCandidates("", candidateLimit)
-            }
+        // Önce daha önce çıkmamış sorulara bakıyoruz.
+        var candidates = dao.unseenCandidates(lastCategory, candidateLimit)
+        if (candidates.isEmpty()) {
+            candidates = dao.unseenCandidates("", candidateLimit)
+        }
+
+        // Hepsi görüldüyse en uzun zamandır gösterilmeyenlere dönüyoruz.
+        if (candidates.isEmpty()) {
+            candidates = dao.oldestCandidates(lastCategory, candidateLimit)
+        }
+        if (candidates.isEmpty()) {
+            candidates = dao.oldestCandidates("", candidateLimit)
         }
 
         check(candidates.isNotEmpty()) { "Soru veritabanı boş." }
