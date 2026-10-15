@@ -316,7 +316,7 @@ private fun AnswerOption(
                 contentColor = if (isCorrect || isWrongSelection) Color.White else MaterialTheme.colorScheme.onSurface,
             ) {
                 Box(Modifier.size(34.dp), contentAlignment = Alignment.Center) {
-                    Text(('A'.code + index).toChar().toString(), fontWeight = FontWeight.Black)
+                    Text(('A'.code + index).toChar().toString(), fontWeight = FontWeight.Bold)
                 }
             }
             Text(text, modifier = Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)

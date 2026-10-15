@@ -528,7 +528,7 @@ private fun ProtectionCard(
                             formatDuration(remaining)
                         },
                         fontSize = 40.sp,
-                        fontWeight = FontWeight.Black,
+                        fontWeight = FontWeight.Bold,
                         letterSpacing = (-1).sp,
                     )
                     Text(
@@ -819,7 +819,7 @@ private fun SettingsScreen(
         ) {
             Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text("SORU KÜTÜPHANESİ", style = MaterialTheme.typography.labelMedium, color = BilGecRed)
-                Text(questionCount.toString(), fontSize = 44.sp, fontWeight = FontWeight.Black)
+                Text(questionCount.toString(), fontSize = 44.sp, fontWeight = FontWeight.Bold)
                 Text("Çevrimdışı, hesap gerektirmeyen Türkçe soru.", color = Color.White.copy(alpha = 0.72f))
                 HorizontalDivider(color = Color.White.copy(alpha = 0.15f))
                 Text("BilGeç 1.1", style = MaterialTheme.typography.labelLarge)

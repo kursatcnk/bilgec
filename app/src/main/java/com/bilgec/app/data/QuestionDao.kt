@@ -12,7 +12,8 @@ interface QuestionDao {
         LEFT JOIN question_progress p ON p.fact_key = q.fact_key
         WHERE p.fact_key IS NULL
           AND (:excludedCategory = '' OR q.category != :excludedCategory)
-        ORDER BY q.id
+        GROUP BY q.fact_key
+        ORDER BY RANDOM()
         LIMIT :limit
         """,
     )
