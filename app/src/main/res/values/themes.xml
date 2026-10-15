@@ -3,8 +3,8 @@
     <style name="Theme.BilGec" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:navigationBarColor">#F8F7FC</item>
-        <item name="android:statusBarColor">#F8F7FC</item>
+        <item name="android:navigationBarColor">#F7F3EE</item>
+        <item name="android:statusBarColor">#F7F3EE</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 

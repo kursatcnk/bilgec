@@ -2,24 +2,126 @@ package com.bilgec.app.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.bilgec.app.settings.DarkMode
 
+val BilGecRed = Color(0xFFF04438)
+val BilGecInk = Color(0xFF171513)
+val BilGecCream = Color(0xFFF7F3EE)
+val BilGecMist = Color(0xFFEAE5DF)
+val BilGecSuccess = Color(0xFF15845C)
+
 private val LightColors = lightColorScheme(
-    primary = Color(0xFF5B4BD8),
-    secondary = Color(0xFF6750A4),
-    background = Color(0xFFF8F7FC),
-    surface = Color(0xFFFFFFFF),
+    primary = BilGecRed,
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFFFFDAD5),
+    onPrimaryContainer = Color(0xFF410002),
+    secondary = BilGecInk,
+    onSecondary = Color.White,
+    background = BilGecCream,
+    onBackground = BilGecInk,
+    surface = Color(0xFFFFFBF7),
+    onSurface = BilGecInk,
+    surfaceVariant = Color(0xFFEDE7E1),
+    onSurfaceVariant = Color(0xFF625D58),
+    outline = Color(0xFFC9C1BA),
+    outlineVariant = Color(0xFFE1DAD3),
+    error = Color(0xFFBA1A1A),
 )
 
 private val DarkColors = darkColorScheme(
-    primary = Color(0xFFC6BFFF),
-    secondary = Color(0xFFCBC2DB),
-    background = Color(0xFF131318),
-    surface = Color(0xFF1B1B21),
+    primary = Color(0xFFFFB4A9),
+    onPrimary = Color(0xFF690005),
+    primaryContainer = Color(0xFF93000B),
+    onPrimaryContainer = Color(0xFFFFDAD5),
+    secondary = Color(0xFFF1EAE4),
+    onSecondary = BilGecInk,
+    background = Color(0xFF121110),
+    onBackground = Color(0xFFF2ECE6),
+    surface = Color(0xFF1B1917),
+    onSurface = Color(0xFFF2ECE6),
+    surfaceVariant = Color(0xFF2A2724),
+    onSurfaceVariant = Color(0xFFD1C8C0),
+    outline = Color(0xFF958D86),
+    outlineVariant = Color(0xFF49443F),
+    error = Color(0xFFFFB4AB),
+)
+
+private val BilGecTypography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Black,
+        fontSize = 48.sp,
+        lineHeight = 48.sp,
+        letterSpacing = (-1.8).sp,
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Black,
+        fontSize = 34.sp,
+        lineHeight = 38.sp,
+        letterSpacing = (-1.1).sp,
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = 28.sp,
+        lineHeight = 32.sp,
+        letterSpacing = (-0.7).sp,
+    ),
+    headlineSmall = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 30.sp,
+        letterSpacing = (-0.45).sp,
+    ),
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        lineHeight = 25.sp,
+    ),
+    titleMedium = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 16.sp,
+        lineHeight = 21.sp,
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+    ),
+    labelLarge = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
+        lineHeight = 18.sp,
+        letterSpacing = 0.1.sp,
+    ),
+    labelMedium = TextStyle(
+        fontFamily = FontFamily.SansSerif,
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.7.sp,
+    ),
 )
 
 @Composable
@@ -34,7 +136,7 @@ fun BilGecTheme(
     }
     MaterialTheme(
         colorScheme = if (useDarkColors) DarkColors else LightColors,
+        typography = BilGecTypography,
         content = content,
     )
 }
-

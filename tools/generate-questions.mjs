@@ -24,6 +24,24 @@ const capitalNames = {
   "Vienna": "Viyana", "Warsaw": "Varşova", "Yerevan": "Erivan",
 };
 const continentNames = { Africa: "Afrika", Americas: "Amerika", Asia: "Asya", Europe: "Avrupa", Oceania: "Okyanusya", Antarctic: "Antarktika" };
+const elementCategoryNames = {
+  "diatomic nonmetal": "İki atomlu ametal",
+  "noble gas": "Soy gaz",
+  "alkali metal": "Alkali metal",
+  "alkaline earth metal": "Toprak alkali metal",
+  metalloid: "Yarı metal",
+  "polyatomic nonmetal": "Çok atomlu ametal",
+  "post-transition metal": "Geçiş sonrası metal",
+  "transition metal": "Geçiş metali",
+  lanthanide: "Lantanit",
+  actinide: "Aktinit",
+  "unknown, probably transition metal": "Muhtemel geçiş metali",
+  "unknown, probably post-transition metal": "Muhtemel geçiş sonrası metal",
+  "unknown, probably metalloid": "Muhtemel yarı metal",
+  "unknown, predicted to be noble gas": "Muhtemel soy gaz",
+  "unknown, but predicted to be an alkali metal": "Muhtemel alkali metal",
+};
+const phaseNames = { Gas: "Gaz", Solid: "Katı", Liquid: "Sıvı" };
 const elementNames = [
   "Hidrojen", "Helyum", "Lityum", "Berilyum", "Bor", "Karbon", "Azot", "Oksijen", "Flor", "Neon",
   "Sodyum", "Magnezyum", "Alüminyum", "Silisyum", "Fosfor", "Kükürt", "Klor", "Argon", "Potasyum", "Kalsiyum",
@@ -40,6 +58,7 @@ const elementNames = [
 ];
 
 const countryName = (country) => country.translations?.tur?.common || country.name.common;
+const officialCountryName = (country) => country.translations?.tur?.official || country.name.official;
 const capitalName = (country) => capitalNames[country.capital?.[0]] || country.capital?.[0];
 const continentName = (country) => continentNames[country.region] || country.region;
 const countryByCode = new Map(countries.map((country) => [country.cca3, country]));
@@ -79,13 +98,20 @@ const continents = [...new Set(countries.map(continentName))];
 const currencyCodes = [...new Set(countries.flatMap((country) => Object.keys(country.currencies || {})))];
 const callingCodes = countries.map((country) => country.idd?.root && country.idd?.suffixes?.length === 1 ? `${country.idd.root}${country.idd.suffixes[0]}` : null).filter(Boolean);
 const tlds = countries.map((country) => country.tld?.[0]).filter(Boolean);
+const officialNames = countries.map(officialCountryName);
 
 for (const country of countries) {
   const name = countryName(country);
   const continent = continentName(country);
   const regionalCountries = countries.filter((item) => item.region === country.region).map(countryName);
   const flagWrong = wrongFrom(regionalCountries.length >= 4 ? regionalCountries : names, name, `flag:${country.cca2}`);
-  for (const prompt of ["Görseldeki bayrak hangi ülkeye aittir?", "Bu bayrak hangi ülkeyi temsil eder?"]) {
+  for (const prompt of [
+    "Görseldeki bayrak hangi ülkeye aittir?",
+    "Bu bayrak hangi ülkeyi temsil eder?",
+    "Ekrandaki bayrağın ülkesi hangisidir?",
+    "Bu ulusal bayrak hangi seçenekte doğru verilmiştir?",
+    "Gösterilen bayrağı kullanan ülke hangisidir?",
+  ]) {
     addQuestion({ category: "Bayraklar", prompt, correct: name, wrong: flagWrong, explanation: `Görselde ${name} bayrağı yer alıyor.`, factKey: `flag:${country.cca2}`, imageAsset: `flags/${country.cca2.toLowerCase()}.png` });
   }
 
@@ -95,21 +121,68 @@ for (const country of countries) {
     addQuestion({ category: "Coğrafya", prompt: `${name} ülkesinin başkenti hangisidir?`, correct: capital, wrong: capitalWrong, explanation: `${name} ülkesinin başkenti ${capital} şehridir.`, factKey: `capital:${country.cca2}` });
     addQuestion({ category: "Coğrafya", prompt: `${name} için doğru başkent hangisidir?`, correct: capital, wrong: capitalWrong, explanation: `${capital}, ${name} ülkesinin başkentidir.`, factKey: `capital:${country.cca2}` });
     addQuestion({ category: "Coğrafya", prompt: `${capital} hangi ülkenin başkentidir?`, correct: name, wrong: flagWrong, explanation: `${capital}, ${name} ülkesinin başkentidir.`, factKey: `capital:${country.cca2}` });
+    addQuestion({ category: "Coğrafya", prompt: `Başkenti ${capital} olan ülke hangisidir?`, correct: name, wrong: flagWrong, explanation: `${capital}, ${name} ülkesinin başkentidir.`, factKey: `capital:${country.cca2}` });
+    addQuestion({ category: "Coğrafya", prompt: `${name} denince hangi başkent eşleştirmesi doğrudur?`, correct: capital, wrong: capitalWrong, explanation: `${name} ile ${capital} doğru ülke-başkent eşleşmesidir.`, factKey: `capital:${country.cca2}` });
+    addQuestion({ category: "Coğrafya", prompt: `Aşağıdaki şehirlerden hangisi ${name} ülkesinin yönetim merkezidir?`, correct: capital, wrong: capitalWrong, explanation: `${name} ülkesinin başkenti ${capital} şehridir.`, factKey: `capital:${country.cca2}` });
   }
 
   const continentWrong = wrongFrom(continents, continent, `continent:${country.cca2}`);
-  for (const prompt of [`${name} hangi kıtadadır?`, `${name} ülkesinin bulunduğu kıta hangisidir?`]) {
+  for (const prompt of [
+    `${name} hangi kıtadadır?`,
+    `${name} ülkesinin bulunduğu kıta hangisidir?`,
+    `${name} hangi kıta ile doğru eşleştirilir?`,
+    `Haritada ${name} ülkesini ararken hangi kıtaya bakmalısınız?`,
+  ]) {
     addQuestion({ category: "Coğrafya", prompt, correct: continent, wrong: continentWrong, explanation: `${name}, ${continent} kıtasında yer alır.`, factKey: `continent:${country.cca2}` });
   }
 
   const codeWrong = wrongFrom(countries.map((item) => item.cca2), country.cca2, `code:${country.cca2}`);
   addQuestion({ category: "Coğrafya", prompt: `${name} ülkesinin iki harfli uluslararası kodu hangisidir?`, correct: country.cca2, wrong: codeWrong, explanation: `${name} için ISO 3166-1 alpha-2 kodu ${country.cca2}'dir.`, factKey: `code:${country.cca2}` });
   addQuestion({ category: "Coğrafya", prompt: `${country.cca2} ülke kodu hangi ülkeye aittir?`, correct: name, wrong: flagWrong, explanation: `${country.cca2}, ${name} ülkesinin iki harfli kodudur.`, factKey: `code:${country.cca2}` });
+  addQuestion({ category: "Coğrafya", prompt: `ISO sisteminde ${name} için kullanılan iki harf hangileridir?`, correct: country.cca2, wrong: codeWrong, explanation: `${name} için iki harfli ISO kodu ${country.cca2}'dir.`, factKey: `code:${country.cca2}` });
+  addQuestion({ category: "Coğrafya", prompt: `İki harfli kodu ${country.cca2} olan ülke hangisidir?`, correct: name, wrong: flagWrong, explanation: `${country.cca2} kodu ${name} ülkesini belirtir.`, factKey: `code:${country.cca2}` });
+
+  const alpha3Wrong = wrongFrom(countries.map((item) => item.cca3), country.cca3, `alpha3:${country.cca2}`);
+  for (const prompt of [
+    `${name} ülkesinin üç harfli ISO kodu hangisidir?`,
+    `${name} için doğru ISO alpha-3 kodu hangisidir?`,
+  ]) {
+    addQuestion({ category: "Coğrafya", prompt, correct: country.cca3, wrong: alpha3Wrong, explanation: `${name} ülkesinin üç harfli ISO kodu ${country.cca3}'dir.`, factKey: `alpha3:${country.cca2}` });
+  }
+  for (const prompt of [
+    `${country.cca3} üç harfli kodu hangi ülkeye aittir?`,
+    `ISO alpha-3 kodu ${country.cca3} olan ülke hangisidir?`,
+  ]) {
+    addQuestion({ category: "Coğrafya", prompt, correct: name, wrong: flagWrong, explanation: `${country.cca3}, ${name} ülkesinin üç harfli kodudur.`, factKey: `alpha3:${country.cca2}` });
+  }
+
+  if (country.ccn3) {
+    const numericWrong = wrongFrom(countries.map((item) => item.ccn3).filter(Boolean), country.ccn3, `numeric:${country.cca2}`);
+    for (const prompt of [
+      `${name} ülkesinin üç haneli sayısal ISO kodu hangisidir?`,
+      `${name} için doğru sayısal ülke kodunu seçin.`,
+      `${country.ccn3} sayısal ISO kodu hangi ülkeye aittir?`,
+    ]) {
+      const reverse = prompt.startsWith(country.ccn3);
+      addQuestion({ category: "Coğrafya", prompt, correct: reverse ? name : country.ccn3, wrong: reverse ? flagWrong : numericWrong, explanation: `${name} ülkesinin sayısal ISO kodu ${country.ccn3}'tür.`, factKey: `numeric:${country.cca2}` });
+    }
+  }
+
+  const official = officialCountryName(country);
+  const officialWrong = wrongFrom(officialNames, official, `official:${country.cca2}`);
+  for (const prompt of [`${name} ülkesinin resmî adı hangisidir?`, `${name} için doğru resmî devlet adını seçin.`]) {
+    addQuestion({ category: "Coğrafya", prompt, correct: official, wrong: officialWrong, explanation: `${name} ülkesinin resmî adı “${official}” şeklindedir.`, factKey: `official:${country.cca2}` });
+  }
 
   const currency = Object.keys(country.currencies || {})[0];
   if (currency) {
     const wrong = wrongFrom(currencyCodes, currency, `currency:${country.cca2}`);
-    for (const prompt of [`${name} ülkesinde kullanılan para biriminin kodu hangisidir?`, `${name} için doğru para birimi kodu hangisidir?`]) {
+    for (const prompt of [
+      `${name} ülkesinde kullanılan para biriminin kodu hangisidir?`,
+      `${name} için doğru para birimi kodu hangisidir?`,
+      `${name} ülkesinde ödeme yaparken hangi para birimi koduyla karşılaşırsınız?`,
+      `Aşağıdaki para birimi kodlarından hangisi ${name} ile eşleşir?`,
+    ]) {
       addQuestion({ category: "Coğrafya", prompt, correct: currency, wrong, explanation: `${name} ülkesinde kullanılan para biriminin uluslararası kodu ${currency}'dir.`, factKey: `currency:${country.cca2}` });
     }
   }
@@ -117,16 +190,28 @@ for (const country of countries) {
   const calling = country.idd?.root && country.idd?.suffixes?.length === 1 ? `${country.idd.root}${country.idd.suffixes[0]}` : null;
   if (calling) {
     const wrong = wrongFrom(callingCodes, calling, `calling:${country.cca2}`);
-    for (const prompt of [`${name} ülkesinin uluslararası telefon kodu hangisidir?`, `Hangi telefon kodu ${name} ülkesine aittir?`]) {
-      addQuestion({ category: "Coğrafya", prompt, correct: calling, wrong, explanation: `${name} ülkesinin uluslararası telefon kodu ${calling}'dir.`, factKey: `calling:${country.cca2}` });
+    for (const prompt of [
+      `${name} ülkesinin uluslararası telefon kodu hangisidir?`,
+      `Hangi telefon kodu ${name} ülkesine aittir?`,
+      `${name} ülkesini ararken numaranın başına hangi kod eklenir?`,
+      `${calling} telefon kodu hangi ülkeye aittir?`,
+    ]) {
+      const reverse = prompt.startsWith(calling);
+      addQuestion({ category: "Coğrafya", prompt, correct: reverse ? name : calling, wrong: reverse ? flagWrong : wrong, explanation: `${name} ülkesinin uluslararası telefon kodu ${calling}'dir.`, factKey: `calling:${country.cca2}` });
     }
   }
 
   const tld = country.tld?.[0];
   if (tld) {
     const wrong = wrongFrom(tlds, tld, `tld:${country.cca2}`);
-    for (const prompt of [`${name} ülkesinin internet alan adı uzantısı hangisidir?`, `Hangi alan adı uzantısı ${name} ülkesine aittir?`]) {
-      addQuestion({ category: "Teknoloji", prompt, correct: tld, wrong, explanation: `${tld}, ${name} için ayrılan ülke kodlu internet alanıdır.`, factKey: `tld:${country.cca2}` });
+    for (const prompt of [
+      `${name} ülkesinin internet alan adı uzantısı hangisidir?`,
+      `Hangi alan adı uzantısı ${name} ülkesine aittir?`,
+      `${tld} uzantılı bir internet adresi hangi ülkeyle ilişkilidir?`,
+      `Ülke kodlu alan adı ${tld} olan ülke hangisidir?`,
+    ]) {
+      const reverse = prompt.startsWith(tld) || prompt.includes(`adı ${tld}`);
+      addQuestion({ category: "Teknoloji", prompt, correct: reverse ? name : tld, wrong: reverse ? flagWrong : wrong, explanation: `${tld}, ${name} için ayrılan ülke kodlu internet alanıdır.`, factKey: `tld:${country.cca2}` });
     }
   }
 
@@ -136,7 +221,14 @@ for (const country of countries) {
     const correct = countryName(border);
     const forbidden = (country.borders || []).map((code) => countryByCode.get(code)).filter(Boolean).map(countryName);
     const wrong = wrongFrom(regionalCountries, correct, `border:${country.cca2}:${borderCode}`, forbidden);
-    if (wrong.length === 3) addQuestion({ category: "Coğrafya", prompt: `Hangisi ${name} ile kara sınırı olan ülkelerden biridir?`, correct, wrong, explanation: `${name} ile ${correct} arasında kara sınırı bulunur.`, factKey: `border:${country.cca2}:${borderCode}` });
+    if (wrong.length === 3) {
+      for (const prompt of [
+        `Hangisi ${name} ile kara sınırı olan ülkelerden biridir?`,
+        `${name} ülkesinin kara komşularından biri hangisidir?`,
+      ]) {
+        addQuestion({ category: "Coğrafya", prompt, correct, wrong, explanation: `${name} ile ${correct} arasında kara sınırı bulunur.`, factKey: `border:${country.cca2}:${borderCode}` });
+      }
+    }
   }
 }
 
@@ -148,10 +240,40 @@ for (const element of elements) {
   const wrongNumbers = wrongFrom(nearby.map((item) => String(item.number)), String(element.number), `element-number:${element.number}`);
   addQuestion({ category: "Bilim", prompt: `${name} elementinin kimyasal simgesi hangisidir?`, correct: element.symbol, wrong: wrongSymbols, explanation: `${name} elementinin simgesi ${element.symbol}'dir.`, factKey: `element-symbol:${element.number}` });
   addQuestion({ category: "Bilim", prompt: `${element.symbol} simgesi hangi elemente aittir?`, correct: name, wrong: wrongNames, explanation: `${element.symbol}, ${name} elementinin simgesidir.`, factKey: `element-symbol:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `Periyodik tabloda ${name} hangi simgeyle gösterilir?`, correct: element.symbol, wrong: wrongSymbols, explanation: `${name} elementinin simgesi ${element.symbol}'dir.`, factKey: `element-symbol:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `Kimyasal simgesi ${element.symbol} olan element hangisidir?`, correct: name, wrong: wrongNames, explanation: `${element.symbol}, ${name} elementinin simgesidir.`, factKey: `element-symbol:${element.number}` });
   addQuestion({ category: "Bilim", prompt: `${name} elementinin atom numarası kaçtır?`, correct: String(element.number), wrong: wrongNumbers, explanation: `${name} elementinin atom numarası ${element.number}'dir.`, factKey: `element-number:${element.number}` });
   addQuestion({ category: "Bilim", prompt: `Atom numarası ${element.number} olan element hangisidir?`, correct: name, wrong: wrongNames, explanation: `${element.number} atom numarası ${name} elementine aittir.`, factKey: `element-number:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `Periyodik tabloda ${name} kaç numaralı elementtir?`, correct: String(element.number), wrong: wrongNumbers, explanation: `${name} elementinin atom numarası ${element.number}'dir.`, factKey: `element-number:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `${element.number}. elementin adı nedir?`, correct: name, wrong: wrongNames, explanation: `${element.number}. element ${name}'dir.`, factKey: `element-number:${element.number}` });
   const period = String(element.period);
   addQuestion({ category: "Bilim", prompt: `${name} periyodik tablonun kaçıncı periyodundadır?`, correct: period, wrong: wrongFrom(["1", "2", "3", "4", "5", "6", "7"], period, `element-period:${element.number}`), explanation: `${name}, periyodik tablonun ${period}. periyodunda bulunur.`, factKey: `element-period:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `${name} hangi periyotta yer alır?`, correct: period, wrong: wrongFrom(["1", "2", "3", "4", "5", "6", "7"], period, `element-period-2:${element.number}`), explanation: `${name}, periyodik tablonun ${period}. periyodundadır.`, factKey: `element-period:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `Aşağıdakilerden hangisi periyodik tablonun ${period}. periyodunda bulunur?`, correct: name, wrong: wrongFrom(elements.filter((item) => item.period !== element.period).map((item) => elementNames[item.number - 1]), name, `element-period-reverse:${element.number}`), explanation: `${name}, periyodik tablonun ${period}. periyodunda bulunur.`, factKey: `element-period:${element.number}` });
+
+  const group = String(element.group);
+  const groupWrong = wrongFrom(Array.from({ length: 18 }, (_, index) => String(index + 1)), group, `element-group:${element.number}`);
+  addQuestion({ category: "Bilim", prompt: `${name} periyodik tablonun kaçıncı grubundadır?`, correct: group, wrong: groupWrong, explanation: `${name}, periyodik tablonun ${group}. grubunda yer alır.`, factKey: `element-group:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `${name} için doğru periyodik tablo grubu hangisidir?`, correct: group, wrong: groupWrong, explanation: `${name}, ${group}. grup elementidir.`, factKey: `element-group:${element.number}` });
+  addQuestion({ category: "Bilim", prompt: `Aşağıdakilerden hangisi periyodik tablonun ${group}. grubunda yer alır?`, correct: name, wrong: wrongFrom(elements.filter((item) => item.group !== element.group).map((item) => elementNames[item.number - 1]), name, `element-group-reverse:${element.number}`), explanation: `${name}, ${group}. grupta bulunur.`, factKey: `element-group:${element.number}` });
+
+  const block = `${element.block} bloku`;
+  const blockOptions = ["s bloku", "p bloku", "d bloku", "f bloku"];
+  for (const prompt of [`${name} hangi elektron blokunda yer alır?`, `${name} için doğru periyodik tablo bloku hangisidir?`]) {
+    addQuestion({ category: "Bilim", prompt, correct: block, wrong: wrongFrom(blockOptions, block, `element-block:${element.number}`), explanation: `${name}, periyodik tablonun ${block} içinde yer alır.`, factKey: `element-block:${element.number}` });
+  }
+
+  const phase = phaseNames[element.phase];
+  const phaseOptions = ["Katı", "Sıvı", "Gaz", "Plazma"];
+  for (const prompt of [`${name} oda koşullarında hangi hâldedir?`, `Oda koşullarında ${name} için doğru fiziksel hâl hangisidir?`]) {
+    addQuestion({ category: "Bilim", prompt, correct: phase, wrong: wrongFrom(phaseOptions, phase, `element-phase:${element.number}`), explanation: `${name}, oda koşullarında ${phase.toLocaleLowerCase("tr-TR")} hâldedir.`, factKey: `element-phase:${element.number}` });
+  }
+
+  const elementCategory = elementCategoryNames[element.category];
+  const categoryOptions = [...new Set(Object.values(elementCategoryNames))];
+  for (const prompt of [`${name} hangi element sınıfında değerlendirilir?`, `${name} için doğru kimyasal sınıflandırma hangisidir?`]) {
+    addQuestion({ category: "Bilim", prompt, correct: elementCategory, wrong: wrongFrom(categoryOptions, elementCategory, `element-category:${element.number}`), explanation: `${name}, “${elementCategory}” sınıfında değerlendirilir.`, factKey: `element-category:${element.number}` });
+  }
 }
 
 for (const item of manualQuestions) addQuestion(item);

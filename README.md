@@ -9,7 +9,7 @@ Hesap, reklam, sunucu veya çalışma anında internet bağlantısı kullanmaz. 
 - Instagram, TikTok, X, YouTube, Facebook, Reddit ve Snapchat için ortak aktif kullanım sayacı
 - 15, 30, 45 ve 60 dakikalık soru aralıkları
 - Bir saat veya gün sonuna kadar duraklatma
-- 4.324 çevrimdışı soru; bayraklar, coğrafya, bilim, tarih, sanat, doğa, spor ve teknoloji
+- 11.578 çevrimdışı soru ve 3.592 benzersiz bilgi; bayraklar, coğrafya, bilim, tarih, sanat, doğa, spor ve teknoloji
 - Görülmemiş bilgileri önceleyen, `factKey` tabanlı tekrar önleme
 - Günlük çözülen/doğru sayısı ve günlük seri
 - Açık, koyu ve sistem teması
@@ -19,7 +19,7 @@ Hesap, reklam, sunucu veya çalışma anında internet bağlantısı kullanmaz. 
 
 | Ana ekran | Soru ekranı |
 | --- | --- |
-| ![BilGeç ana ekranı](docs/screenshots/home.png) | ![BilGeç soru ekranı](docs/screenshots/question.png) |
+| ![BilGeç ana ekranı](docs/screenshots/home-redesign.png) | ![BilGeç soru ekranı](docs/screenshots/question-redesign.png) |
 
 ## Derleme
 
