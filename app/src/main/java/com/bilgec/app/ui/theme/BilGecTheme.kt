@@ -15,25 +15,27 @@ import com.bilgec.app.settings.DarkMode
 
 val BilGecRed = Color(0xFFF04438)
 val BilGecInk = Color(0xFF171513)
-val BilGecCream = Color(0xFFF7F3EE)
-val BilGecMist = Color(0xFFEAE5DF)
-val BilGecSuccess = Color(0xFF15845C)
+val BilGecCream = Color(0xFFFAF7F2)
+val BilGecMist = Color(0xFFECE6DF)
+val BilGecSuccess = Color(0xFF14805A)
+val BilGecMidnight = Color(0xFF21142E)
+val BilGecPeach = Color(0xFFFFD8C7)
 
 private val LightColors = lightColorScheme(
     primary = BilGecRed,
     onPrimary = Color.White,
-    primaryContainer = Color(0xFFFFDAD5),
-    onPrimaryContainer = Color(0xFF410002),
-    secondary = BilGecInk,
+    primaryContainer = Color(0xFFFFE0D9),
+    onPrimaryContainer = Color(0xFF5A120C),
+    secondary = BilGecMidnight,
     onSecondary = Color.White,
     background = BilGecCream,
     onBackground = BilGecInk,
-    surface = Color(0xFFFFFBF7),
+    surface = Color(0xFFFFFCF9),
     onSurface = BilGecInk,
-    surfaceVariant = Color(0xFFEDE7E1),
-    onSurfaceVariant = Color(0xFF625D58),
-    outline = Color(0xFFC9C1BA),
-    outlineVariant = Color(0xFFE1DAD3),
+    surfaceVariant = Color(0xFFF0EAE4),
+    onSurfaceVariant = Color(0xFF665F59),
+    outline = Color(0xFFC8BDB5),
+    outlineVariant = Color(0xFFE7DED6),
     error = Color(0xFFBA1A1A),
 )
 
@@ -44,11 +46,11 @@ private val DarkColors = darkColorScheme(
     onPrimaryContainer = Color(0xFFFFDAD5),
     secondary = Color(0xFFF1EAE4),
     onSecondary = BilGecInk,
-    background = Color(0xFF121110),
+    background = Color(0xFF100D13),
     onBackground = Color(0xFFF2ECE6),
-    surface = Color(0xFF1B1917),
+    surface = Color(0xFF1C181F),
     onSurface = Color(0xFFF2ECE6),
-    surfaceVariant = Color(0xFF2A2724),
+    surfaceVariant = Color(0xFF2B252D),
     onSurfaceVariant = Color(0xFFD1C8C0),
     outline = Color(0xFF958D86),
     outlineVariant = Color(0xFF49443F),

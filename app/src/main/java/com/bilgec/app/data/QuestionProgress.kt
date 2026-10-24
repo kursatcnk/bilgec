@@ -17,4 +17,10 @@ data class QuestionProgress(
     val lastSeenAt: Long,
     @ColumnInfo(name = "times_seen")
     val timesSeen: Int,
+    @ColumnInfo(name = "correct_count", defaultValue = "0")
+    val correctCount: Int = 0,
+    @ColumnInfo(name = "wrong_count", defaultValue = "0")
+    val wrongCount: Int = 0,
+    @ColumnInfo(name = "is_favorite", defaultValue = "0")
+    val isFavorite: Boolean = false,
 )

@@ -30,12 +30,15 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -48,10 +51,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -63,6 +69,7 @@ import com.bilgec.app.quiz.QuizQuestion
 import com.bilgec.app.settings.AppPreferences
 import com.bilgec.app.tracking.TrackerService
 import com.bilgec.app.ui.theme.BilGecInk
+import com.bilgec.app.ui.theme.BilGecMidnight
 import com.bilgec.app.ui.theme.BilGecRed
 import com.bilgec.app.ui.theme.BilGecSuccess
 import com.bilgec.app.ui.theme.BilGecTheme
@@ -75,6 +82,8 @@ class QuestionActivity : ComponentActivity() {
     private lateinit var repository: QuestionRepository
     private var questionState by mutableStateOf<QuizQuestion?>(null)
     private var errorState by mutableStateOf<String?>(null)
+    private var favoriteState by mutableStateOf(false)
+    private val reviewMode: Boolean get() = intent.getBooleanExtra(extraReviewMode, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +95,10 @@ class QuestionActivity : ComponentActivity() {
                 QuestionOverlay(
                     question = questionState,
                     error = errorState,
+                    isFavorite = favoriteState,
+                    reviewMode = reviewMode,
                     onAnswer = ::recordAnswer,
+                    onToggleFavorite = ::toggleFavorite,
                     onContinue = ::continueToPreviousApp,
                 )
             }
@@ -99,13 +111,22 @@ class QuestionActivity : ComponentActivity() {
             runCatching {
                 withContext(Dispatchers.IO) {
                     // Servisin hazırladığı soru varsa onu aç, yoksa yeni bir tane seç.
-                    val savedId = preferences.currentQuestionId
-                    (if (savedId != AppPreferences.noQuestion) repository.byId(savedId) else null)
-                        ?: repository.next(preferences.lastCategory).also {
+                    val requestedId = intent.getIntExtra(extraQuestionId, AppPreferences.noQuestion)
+                    val savedId = requestedId.takeIf { it != AppPreferences.noQuestion }
+                        ?: preferences.currentQuestionId
+                    val question = (if (savedId != AppPreferences.noQuestion) repository.byId(savedId) else null)
+                        ?: repository.next(
+                            preferences.lastCategory,
+                            preferences.selectedCategories,
+                        ).also {
                             preferences.currentQuestionId = it.id
                         }
+                    question to repository.isFavorite(question.factKey)
                 }
-            }.onSuccess { questionState = it }
+            }.onSuccess { (question, favorite) ->
+                questionState = question
+                favoriteState = favorite
+            }
                 .onFailure { errorState = "Soru yüklenemedi. BilGeç'i açıp yeniden deneyin." }
         }
     }
@@ -113,18 +134,38 @@ class QuestionActivity : ComponentActivity() {
     private fun recordAnswer(question: QuizQuestion, selectedIndex: Int, onSaved: () -> Unit) {
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
-                repository.markSeen(question)
-                preferences.lastCategory = question.category
-                preferences.recordAnswer(selectedIndex == question.correctIndex)
+                val correct = selectedIndex == question.correctIndex
+                repository.markSeen(question, correct)
+                if (!reviewMode) {
+                    preferences.lastCategory = question.category
+                    preferences.recordAnswer(correct)
+                }
             }
             onSaved()
         }
     }
 
+    private fun toggleFavorite(question: QuizQuestion) {
+        val newValue = !favoriteState
+        favoriteState = newValue
+        lifecycleScope.launch(Dispatchers.IO) {
+            repository.setFavorite(question, newValue)
+        }
+    }
+
     private fun continueToPreviousApp() {
+        if (reviewMode) {
+            finish()
+            return
+        }
         // Sayaç sıfırlanıyor, bu ekran kapanınca kullanıcı kaldığı yere dönüyor.
         startService(Intent(this, TrackerService::class.java).setAction(TrackerService.ACTION_CONTINUE))
         finishAndRemoveTask()
+    }
+
+    companion object {
+        const val extraQuestionId = "question_id"
+        const val extraReviewMode = "review_mode"
     }
 }
 
@@ -132,11 +173,15 @@ class QuestionActivity : ComponentActivity() {
 private fun QuestionOverlay(
     question: QuizQuestion?,
     error: String?,
+    isFavorite: Boolean,
+    reviewMode: Boolean,
     onAnswer: (QuizQuestion, Int, () -> Unit) -> Unit,
+    onToggleFavorite: (QuizQuestion) -> Unit,
     onContinue: () -> Unit,
 ) {
     var selectedIndex by remember(question?.id) { mutableStateOf<Int?>(null) }
     var savingAnswer by remember(question?.id) { mutableStateOf(false) }
+    val haptic = LocalHapticFeedback.current
     val progress by animateFloatAsState(
         targetValue = if (selectedIndex == null) 0.52f else 1f,
         label = "questionProgress",
@@ -145,8 +190,12 @@ private fun QuestionOverlay(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.76f))
-            .padding(horizontal = 14.dp, vertical = 22.dp),
+            .background(
+                Brush.linearGradient(
+                    listOf(Color(0xFF160B22), Color(0xFF351025), Color(0xFF432614)),
+                ),
+            )
+            .padding(horizontal = 12.dp, vertical = 20.dp),
         contentAlignment = Alignment.Center,
     ) {
         Card(
@@ -154,20 +203,26 @@ private fun QuestionOverlay(
                 .fillMaxWidth()
                 .heightIn(max = 780.dp)
                 .animateContentSize(),
-            shape = RoundedCornerShape(34.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-            elevation = CardDefaults.cardElevation(defaultElevation = 18.dp),
+            shape = RoundedCornerShape(38.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(defaultElevation = 24.dp),
+            border = BorderStroke(1.dp, Color.White.copy(alpha = 0.13f)),
         ) {
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
-                    .padding(22.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(15.dp),
             ) {
-                QuestionBrandBar()
+                QuestionBrandBar(
+                    isFavorite = isFavorite,
+                    reviewMode = reviewMode,
+                    favoriteEnabled = question != null,
+                    onToggleFavorite = { question?.let(onToggleFavorite) },
+                )
                 LinearProgressIndicator(
                     progress = { progress },
-                    modifier = Modifier.fillMaxWidth().height(6.dp).clip(CircleShape),
+                    modifier = Modifier.fillMaxWidth().height(5.dp).clip(CircleShape),
                     color = BilGecRed,
                     trackColor = MaterialTheme.colorScheme.surfaceVariant,
                 )
@@ -190,7 +245,11 @@ private fun QuestionOverlay(
                         QuestionImage(question)
                         Text(question.prompt, style = MaterialTheme.typography.headlineMedium)
                         Text(
-                            "Doğru seçeneği işaretle ve kaldığın yere dön.",
+                            if (reviewMode) {
+                                "Bu bilgiyi yeniden dene; yanlışlar tekrar ettikçe kolaylaşır."
+                            } else {
+                                "Bir seçim yap, bilgiyi cebine koy ve kaldığın yere dön."
+                            },
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -204,6 +263,7 @@ private fun QuestionOverlay(
                                     correctIndex = question.correctIndex,
                                     enabled = selectedIndex == null && !savingAnswer,
                                     onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                         savingAnswer = true
                                         onAnswer(question, index) {
                                             selectedIndex = index
@@ -233,11 +293,11 @@ private fun QuestionOverlay(
                                 modifier = Modifier.fillMaxWidth().height(56.dp),
                                 shape = RoundedCornerShape(18.dp),
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = BilGecInk,
+                                    containerColor = BilGecMidnight,
                                     contentColor = Color.White,
                                 ),
                             ) {
-                                Text("Uygulamaya devam et")
+                                Text(if (reviewMode) "Tekrar listesine dön" else "Uygulamaya devam et")
                                 Spacer(Modifier.size(8.dp))
                                 Icon(Icons.AutoMirrored.Filled.ArrowForward, null)
                             }
@@ -250,7 +310,12 @@ private fun QuestionOverlay(
 }
 
 @Composable
-private fun QuestionBrandBar() {
+private fun QuestionBrandBar(
+    isFavorite: Boolean,
+    reviewMode: Boolean,
+    favoriteEnabled: Boolean,
+    onToggleFavorite: () -> Unit,
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -258,17 +323,43 @@ private fun QuestionBrandBar() {
     ) {
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(
-                modifier = Modifier.size(38.dp).clip(RoundedCornerShape(13.dp)).background(BilGecRed),
+                modifier = Modifier
+                    .size(42.dp)
+                    .clip(RoundedCornerShape(14.dp))
+                    .background(Brush.linearGradient(listOf(BilGecRed, Color(0xFFFF765F)))),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(Icons.Default.Key, null, tint = Color.White, modifier = Modifier.size(21.dp))
             }
             Column {
                 Text("BilGeç", style = MaterialTheme.typography.titleMedium)
-                Text("BİLGİ MOLASI", style = MaterialTheme.typography.labelMedium, color = BilGecRed)
+                Text(
+                    if (reviewMode) "TEKRAR MODU" else "KISA BİLGİ MOLASI",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = BilGecRed,
+                )
             }
         }
-        Text("1 / 1", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onToggleFavorite, enabled = favoriteEnabled) {
+                Icon(
+                    if (isFavorite) Icons.Default.Star else Icons.Outlined.StarBorder,
+                    contentDescription = if (isFavorite) "Favoriden çıkar" else "Favoriye ekle",
+                    tint = if (isFavorite) Color(0xFFE5A50A) else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.surfaceVariant,
+            ) {
+                Text(
+                    "1 / 1",
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 7.dp),
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
     }
 }
 
@@ -302,6 +393,7 @@ private fun AnswerOption(
         shape = RoundedCornerShape(20.dp),
         color = container,
         border = BorderStroke(if (isCorrect || isWrongSelection) 2.dp else 1.dp, border),
+        shadowElevation = if (revealed) 0.dp else 2.dp,
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 15.dp, vertical = 14.dp),

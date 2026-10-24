@@ -194,7 +194,7 @@ for (const item of manualQuestions) addQuestion(item);
 
 fs.writeFileSync(path.join(root, "data/manual_questions.json"), `${JSON.stringify(manualQuestions, null, 2)}\n`);
 
-const schemaPath = path.join(root, "app/schemas/com.bilgec.app.data.BilGecDatabase/1.json");
+const schemaPath = path.join(root, "app/schemas/com.bilgec.app.data.BilGecDatabase/2.json");
 if (!fs.existsSync(schemaPath)) throw new Error("Önce ./gradlew compileDebugKotlin çalıştırılarak Room şeması üretilmeli.");
 const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
 const SQL = await initSqlJs({ locateFile: (file) => path.join(root, "node_modules/sql.js/dist", file) });
@@ -208,11 +208,47 @@ const insert = database.prepare("INSERT INTO questions (id, category, prompt, op
 for (const question of questions) insert.run([question.id, question.category, question.prompt, ...question.options, question.correctIndex, question.explanation, question.factKey, question.imageAsset, question.reviewed ? 1 : 0]);
 insert.free();
 database.run("COMMIT");
+database.run(`PRAGMA user_version = ${schema.database.version}`);
 
 const assetDirectory = path.join(root, "app/src/main/assets/database");
 fs.mkdirSync(assetDirectory, { recursive: true });
 fs.writeFileSync(path.join(assetDirectory, "bilgec.db"), Buffer.from(database.export()));
 database.close();
+
+const kotlinString = (value) => JSON.stringify(value).replaceAll("$", "\\$");
+const everydaySeed = questions.filter((question) => question.category === "Günlük Bilgi");
+const seedRows = everydaySeed.map((question) => `        db.execSQL(
+            insertSql,
+            arrayOf<Any?>(
+                ${question.id},
+                ${kotlinString(question.category)},
+                ${kotlinString(question.prompt)},
+                ${question.options.map(kotlinString).join(",\n                ")},
+                ${question.correctIndex},
+                ${kotlinString(question.explanation)},
+                ${kotlinString(question.factKey)},
+                ${question.imageAsset === null ? "null" : kotlinString(question.imageAsset)},
+                ${question.reviewed ? 1 : 0},
+            ),
+        )`).join("\n");
+const seedSource = `package com.bilgec.app.data
+
+import androidx.sqlite.db.SupportSQLiteDatabase
+
+// tools/generate-questions.mjs tarafından üretilir. Elle düzenlemeyin.
+internal object QuestionSeedV2 {
+    private const val insertSql =
+        "INSERT OR IGNORE INTO questions (id, category, prompt, option_0, option_1, option_2, option_3, correct_index, explanation, fact_key, image_asset, reviewed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+
+    fun insert(db: SupportSQLiteDatabase) {
+${seedRows}
+    }
+}
+`;
+fs.writeFileSync(
+  path.join(root, "app/src/main/java/com/bilgec/app/data/QuestionSeedV2.kt"),
+  seedSource,
+);
 
 const flagDirectory = path.join(root, "app/src/main/assets/flags");
 fs.mkdirSync(flagDirectory, { recursive: true });

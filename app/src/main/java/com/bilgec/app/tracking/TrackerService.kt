@@ -150,7 +150,10 @@ class TrackerService : Service() {
 
         scope.launch(Dispatchers.IO) {
             runCatching {
-                val question = repository.next(preferences.lastCategory)
+                val question = repository.next(
+                    preferences.lastCategory,
+                    preferences.selectedCategories,
+                )
                 preferences.currentQuestionId = question.id
                 openQuestionActivity()
             }.onFailure {

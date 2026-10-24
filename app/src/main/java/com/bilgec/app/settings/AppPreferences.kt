@@ -39,6 +39,20 @@ class AppPreferences(context: Context) {
         get() = preferences.getStringSet(keySelectedPackages, defaultPackages)?.toSet() ?: defaultPackages
         set(value) = edit { putStringSet(keySelectedPackages, value) }
 
+    var selectedCategories: Set<String>
+        get() {
+            val stored = preferences.getStringSet(keySelectedCategories, questionCategories.toSet()).orEmpty()
+            return stored.intersect(questionCategories.toSet()).ifEmpty { questionCategories.toSet() }
+        }
+        set(value) {
+            val safeValue = value.intersect(questionCategories.toSet()).ifEmpty { questionCategories.toSet() }
+            edit { putStringSet(keySelectedCategories, safeValue) }
+        }
+
+    var dailyGoal: Int
+        get() = preferences.getInt(keyDailyGoal, 5).takeIf { it in dailyGoalOptions } ?: 5
+        set(value) = edit { putInt(keyDailyGoal, value.takeIf { it in dailyGoalOptions } ?: 5) }
+
     var currentQuestionId: Int
         get() = preferences.getInt(keyCurrentQuestionId, noQuestion)
         set(value) = edit { putInt(keyCurrentQuestionId, value) }
@@ -66,6 +80,16 @@ class AppPreferences(context: Context) {
         }
     }
 
+    fun recentStats(dayCount: Int = 7): List<DayProgress> {
+        val history = decodeHistory(preferences.getString(keyStatsHistory, "").orEmpty())
+        val today = LocalDate.now()
+        return (dayCount - 1 downTo 0).map { daysAgo ->
+            val date = today.minusDays(daysAgo.toLong())
+            val values = history[date]
+            DayProgress(date = date, solved = values?.first ?: 0, correct = values?.second ?: 0)
+        }
+    }
+
     fun recordAnswer(correct: Boolean) {
         val today = LocalDate.now()
         val storedDate = preferences.getString(keyStatsDate, "")
@@ -78,15 +102,21 @@ class AppPreferences(context: Context) {
             else -> 1
         }
 
+        val solved = (if (sameDay) preferences.getInt(keyTodaySolved, 0) else 0) + 1
+        val correctAnswers =
+            (if (sameDay) preferences.getInt(keyTodayCorrect, 0) else 0) + if (correct) 1 else 0
+        val history = decodeHistory(preferences.getString(keyStatsHistory, "").orEmpty()).toMutableMap()
+        history[today] = solved to correctAnswers
+        val oldestDate = today.minusDays(29)
+        history.keys.filter { it < oldestDate }.forEach(history::remove)
+
         edit {
             putString(keyStatsDate, today.toString())
-            putInt(keyTodaySolved, (if (sameDay) preferences.getInt(keyTodaySolved, 0) else 0) + 1)
-            putInt(
-                keyTodayCorrect,
-                (if (sameDay) preferences.getInt(keyTodayCorrect, 0) else 0) + if (correct) 1 else 0,
-            )
+            putInt(keyTodaySolved, solved)
+            putInt(keyTodayCorrect, correctAnswers)
             putString(keyLastSolvedDate, today.toString())
             putInt(keyStreak, newStreak)
+            putString(keyStatsHistory, encodeHistory(history))
         }
     }
 
@@ -119,8 +149,36 @@ class AppPreferences(context: Context) {
         preferences.edit().apply(block).apply()
     }
 
+    private fun decodeHistory(raw: String): Map<LocalDate, Pair<Int, Int>> = raw
+        .split(';')
+        .mapNotNull { entry ->
+            val parts = entry.split(',')
+            if (parts.size != 3) return@mapNotNull null
+            val date = runCatching { LocalDate.parse(parts[0]) }.getOrNull() ?: return@mapNotNull null
+            val solved = parts[1].toIntOrNull() ?: return@mapNotNull null
+            val correct = parts[2].toIntOrNull() ?: return@mapNotNull null
+            date to (solved to correct)
+        }
+        .toMap()
+
+    private fun encodeHistory(history: Map<LocalDate, Pair<Int, Int>>): String = history
+        .toSortedMap()
+        .entries
+        .joinToString(";") { (date, values) -> "$date,${values.first},${values.second}" }
+
     companion object {
         val intervalOptions = listOf(15, 30, 45, 60)
+        val dailyGoalOptions = listOf(3, 5, 8, 10)
+        val questionCategories = listOf(
+            "Bayraklar",
+            "Coğrafya",
+            "Bilim",
+            "Tarih",
+            "Sanat",
+            "Doğa",
+            "Spor",
+            "Günlük Bilgi",
+        )
         const val noQuestion = -1
 
         private const val preferencesName = "bilgec_settings"
@@ -131,6 +189,8 @@ class AppPreferences(context: Context) {
         private const val keyPauseUntil = "pause_until"
         private const val keyDarkMode = "dark_mode"
         private const val keySelectedPackages = "selected_packages"
+        private const val keySelectedCategories = "selected_categories"
+        private const val keyDailyGoal = "daily_goal"
         private const val keyCurrentQuestionId = "current_question_id"
         private const val keyLastCategory = "last_category"
         private const val keyStatsDate = "stats_date"
@@ -138,6 +198,7 @@ class AppPreferences(context: Context) {
         private const val keyTodayCorrect = "today_correct"
         private const val keyLastSolvedDate = "last_solved_date"
         private const val keyStreak = "streak"
+        private const val keyStatsHistory = "stats_history"
         private val defaultPackages = setOf("com.instagram.android")
         private val systemZone = java.time.ZoneId.systemDefault()
     }
@@ -147,6 +208,12 @@ data class DailyStats(
     val solved: Int = 0,
     val correct: Int = 0,
     val streak: Int = 0,
+)
+
+data class DayProgress(
+    val date: LocalDate,
+    val solved: Int,
+    val correct: Int,
 )
 
 enum class DarkMode {

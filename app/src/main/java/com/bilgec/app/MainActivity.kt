@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -32,6 +33,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Check
@@ -42,11 +44,13 @@ import androidx.compose.material.icons.filled.LocalFireDepartment
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Smartphone
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -60,6 +64,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -83,6 +88,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
@@ -97,18 +103,24 @@ import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.bilgec.app.data.BilGecDatabase
 import com.bilgec.app.data.QuestionRepository
+import com.bilgec.app.quiz.QuizQuestion
 import com.bilgec.app.settings.AppPreferences
 import com.bilgec.app.settings.DarkMode
 import com.bilgec.app.settings.DailyStats
+import com.bilgec.app.settings.DayProgress
 import com.bilgec.app.settings.SocialApp
 import com.bilgec.app.settings.supportedSocialApps
 import com.bilgec.app.tracking.TrackerService
 import com.bilgec.app.ui.theme.BilGecInk
+import com.bilgec.app.ui.theme.BilGecMidnight
+import com.bilgec.app.ui.theme.BilGecPeach
 import com.bilgec.app.ui.theme.BilGecRed
 import com.bilgec.app.ui.theme.BilGecSuccess
 import com.bilgec.app.ui.theme.BilGecTheme
 import java.text.DateFormat
+import java.time.format.TextStyle
 import java.util.Date
+import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -119,6 +131,8 @@ class MainActivity : ComponentActivity() {
     // İzin ekranından geri dönünce Compose tarafını yenilemek için kullanılıyor.
     private var refreshCounter by mutableIntStateOf(0)
     private var questionCount by mutableIntStateOf(0)
+    private var weakQuestions by mutableStateOf<List<QuizQuestion>>(emptyList())
+    private var favoriteQuestions by mutableStateOf<List<QuizQuestion>>(emptyList())
 
     private val notificationPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -129,6 +143,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         preferences = AppPreferences(this)
         loadQuestionCount()
+        loadReviewLibrary()
 
         setContent {
             refreshCounter
@@ -137,6 +152,8 @@ class MainActivity : ComponentActivity() {
                     preferences = preferences,
                     permissions = permissionState(),
                     questionCount = questionCount,
+                    weakQuestions = weakQuestions,
+                    favoriteQuestions = favoriteQuestions,
                     onOpenUsageAccess = { startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) },
                     onOpenOverlayAccess = {
                         startActivity(
@@ -155,6 +172,7 @@ class MainActivity : ComponentActivity() {
                     onStop = ::stopTracker,
                     onChanged = { refreshCounter++ },
                     onReset = ::resetData,
+                    onReviewQuestion = ::openReviewQuestion,
                 )
             }
         }
@@ -170,6 +188,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         refreshCounter++
+        loadReviewLibrary()
     }
 
     private fun startTracker() {
@@ -194,6 +213,8 @@ class MainActivity : ComponentActivity() {
                 preferences.resetAll()
             }
             stopService(Intent(this@MainActivity, TrackerService::class.java))
+            weakQuestions = emptyList()
+            favoriteQuestions = emptyList()
             refreshCounter++
         }
     }
@@ -204,6 +225,22 @@ class MainActivity : ComponentActivity() {
                 QuestionRepository(BilGecDatabase.get(this@MainActivity).questionDao()).questionCount()
             }.getOrDefault(0)
         }
+    }
+
+    private fun loadReviewLibrary() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val repository = QuestionRepository(BilGecDatabase.get(this@MainActivity).questionDao())
+            weakQuestions = runCatching { repository.weakQuestions() }.getOrDefault(emptyList())
+            favoriteQuestions = runCatching { repository.favoriteQuestions() }.getOrDefault(emptyList())
+        }
+    }
+
+    private fun openReviewQuestion(question: QuizQuestion) {
+        startActivity(
+            Intent(this, QuestionActivity::class.java)
+                .putExtra(QuestionActivity.extraQuestionId, question.id)
+                .putExtra(QuestionActivity.extraReviewMode, true),
+        )
     }
 
     private fun handleIntent(intent: Intent) {
@@ -237,7 +274,8 @@ private data class PermissionState(
 
 private enum class AppPage(val label: String, val icon: ImageVector) {
     HOME("Bugün", Icons.Default.Home),
-    APPS("Uygulamalar", Icons.Default.Apps),
+    REVIEW("Tekrar", Icons.Default.Replay),
+    APPS("Takip", Icons.Default.Apps),
     SETTINGS("Ayarlar", Icons.Default.Settings),
 }
 
@@ -246,6 +284,8 @@ private fun BilGecApp(
     preferences: AppPreferences,
     permissions: PermissionState,
     questionCount: Int,
+    weakQuestions: List<QuizQuestion>,
+    favoriteQuestions: List<QuizQuestion>,
     onOpenUsageAccess: () -> Unit,
     onOpenOverlayAccess: () -> Unit,
     onNotificationAccess: () -> Unit,
@@ -253,6 +293,7 @@ private fun BilGecApp(
     onStop: () -> Unit,
     onChanged: () -> Unit,
     onReset: () -> Unit,
+    onReviewQuestion: (QuizQuestion) -> Unit,
 ) {
     var page by remember { mutableStateOf(AppPage.HOME) }
     var elapsedMs by remember { mutableLongStateOf(preferences.elapsedMs) }
@@ -278,12 +319,20 @@ private fun BilGecApp(
                 permissions = permissions,
                 elapsedMs = elapsedMs,
                 stats = stats,
+                weeklyStats = preferences.recentStats(),
+                dailyGoal = preferences.dailyGoal,
                 questionCount = questionCount,
                 onStart = onStart,
                 onStop = onStop,
                 onOpenUsageAccess = onOpenUsageAccess,
                 onOpenOverlayAccess = onOpenOverlayAccess,
                 onNotificationAccess = onNotificationAccess,
+            )
+            AppPage.REVIEW -> ReviewScreen(
+                modifier = Modifier.padding(padding),
+                weakQuestions = weakQuestions,
+                favoriteQuestions = favoriteQuestions,
+                onQuestion = onReviewQuestion,
             )
             AppPage.APPS -> AppsScreen(
                 modifier = Modifier.padding(padding),
@@ -304,8 +353,11 @@ private fun BilGecApp(
 @Composable
 private fun BottomMenu(page: AppPage, onSelect: (AppPage) -> Unit) {
     Surface(
+        modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(28.dp),
         color = MaterialTheme.colorScheme.surface,
-        shadowElevation = 14.dp,
+        shadowElevation = 18.dp,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
     ) {
         NavigationBar(
             containerColor = Color.Transparent,
@@ -337,6 +389,8 @@ private fun HomeScreen(
     permissions: PermissionState,
     elapsedMs: Long,
     stats: DailyStats,
+    weeklyStats: List<DayProgress>,
+    dailyGoal: Int,
     questionCount: Int,
     onStart: () -> Unit,
     onStop: () -> Unit,
@@ -347,17 +401,30 @@ private fun HomeScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.09f),
+                        MaterialTheme.colorScheme.background,
+                        MaterialTheme.colorScheme.background,
+                    ),
+                ),
+            )
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp, vertical = 18.dp),
         verticalArrangement = Arrangement.spacedBy(18.dp),
     ) {
         AppHeader()
         Text(
-            "Kaydırmadan önce\nbir şey öğren.",
+            "Kaydırmadan önce\nbir şey keşfet.",
             style = MaterialTheme.typography.displayLarge,
         )
         Text(
-            "Seçtiğin uygulamalar açılmadan önce kısa bir bilgi molası. $questionCount çevrimdışı soru, sıfır hesap.",
+            if (questionCount > 0) {
+                "Seçtiğin uygulamalarda vakit geçirirken kısa bir bilgi molası. $questionCount çevrimdışı soru, sıfır hesap."
+            } else {
+                "Seçtiğin uygulamalarda vakit geçirirken kısa bir bilgi molası. Tamamen çevrimdışı, sıfır hesap."
+            },
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -377,6 +444,9 @@ private fun HomeScreen(
             SmallStatCard(Icons.Default.CheckCircle, stats.correct.toString(), "Doğru", Modifier.weight(1f))
             SmallStatCard(Icons.Default.LocalFireDepartment, stats.streak.toString(), "Gün seri", Modifier.weight(1f))
         }
+
+        DailyGoalCard(solved = stats.solved, goal = dailyGoal)
+        WeeklyProgressCard(days = weeklyStats)
 
         if (!permissions.allGranted) {
             SectionHeading("KURULUM", "Üç küçük adım kaldı")
@@ -405,7 +475,8 @@ private fun HomeScreen(
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant,
+                color = BilGecSuccess.copy(alpha = 0.10f),
+                border = BorderStroke(1.dp, BilGecSuccess.copy(alpha = 0.25f)),
             ) {
                 Row(
                     Modifier.padding(18.dp),
@@ -439,13 +510,19 @@ private fun AppHeader() {
             AppLogo(42.dp)
             Text("BilGeç", style = MaterialTheme.typography.titleLarge)
         }
-        Surface(shape = CircleShape, color = MaterialTheme.colorScheme.surfaceVariant) {
-            Icon(
-                Icons.Default.AutoAwesome,
-                contentDescription = null,
-                modifier = Modifier.padding(10.dp).size(20.dp),
-                tint = BilGecRed,
-            )
+        Surface(
+            shape = CircleShape,
+            color = MaterialTheme.colorScheme.surface,
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(Icons.Default.AutoAwesome, null, Modifier.size(16.dp), tint = BilGecRed)
+                Text("GÜNLÜK MERAK", style = MaterialTheme.typography.labelMedium)
+            }
         }
     }
 }
@@ -473,7 +550,7 @@ private fun TimerCard(
     pausedUntilMs: Long?,
     onToggle: (Boolean) -> Unit,
 ) {
-    val cardColor = if (enabled) BilGecRed else MaterialTheme.colorScheme.surface
+    val cardColor = Color.Transparent
     val contentColor = if (enabled) Color.White else MaterialTheme.colorScheme.onSurface
     val remaining = (intervalMs - elapsedMs).coerceAtLeast(0L)
     val progress = if (intervalMs > 0) (elapsedMs.toFloat() / intervalMs).coerceIn(0f, 1f) else 0f
@@ -483,9 +560,26 @@ private fun TimerCard(
         shape = RoundedCornerShape(32.dp),
         color = cardColor,
         contentColor = contentColor,
-        shadowElevation = if (enabled) 8.dp else 2.dp,
+        shadowElevation = if (enabled) 14.dp else 4.dp,
+        border = BorderStroke(
+            1.dp,
+            if (enabled) Color.White.copy(alpha = 0.13f) else MaterialTheme.colorScheme.outlineVariant,
+        ),
     ) {
-        Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
+        Column(
+            Modifier
+                .background(
+                    if (enabled) {
+                        Brush.linearGradient(listOf(BilGecMidnight, Color(0xFF67243B), BilGecRed))
+                    } else {
+                        Brush.linearGradient(
+                            listOf(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.surfaceVariant),
+                        )
+                    },
+                )
+                .padding(22.dp),
+            verticalArrangement = Arrangement.spacedBy(18.dp),
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -567,9 +661,229 @@ private fun SmallStatCard(icon: ImageVector, value: String, label: String, modif
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
     ) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Icon(icon, null, tint = BilGecRed, modifier = Modifier.size(20.dp))
+            Surface(shape = CircleShape, color = BilGecPeach.copy(alpha = 0.65f)) {
+                Icon(icon, null, tint = BilGecRed, modifier = Modifier.padding(7.dp).size(18.dp))
+            }
             Text(value, style = MaterialTheme.typography.headlineSmall)
             Text(label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+@Composable
+private fun DailyGoalCard(solved: Int, goal: Int) {
+    val progress = (solved.toFloat() / goal.coerceAtLeast(1)).coerceIn(0f, 1f)
+    val completed = solved >= goal
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(24.dp),
+        color = if (completed) BilGecSuccess.copy(alpha = 0.11f) else MaterialTheme.colorScheme.surface,
+        border = BorderStroke(
+            1.dp,
+            if (completed) BilGecSuccess.copy(alpha = 0.35f) else MaterialTheme.colorScheme.outlineVariant,
+        ),
+    ) {
+        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        if (completed) Icons.Default.CheckCircle else Icons.AutoMirrored.Filled.TrendingUp,
+                        null,
+                        tint = if (completed) BilGecSuccess else BilGecRed,
+                    )
+                    Column {
+                        Text("Günlük hedef", style = MaterialTheme.typography.titleMedium)
+                        Text(
+                            if (completed) "Bugünün hedefi tamamlandı" else "$goal bilgi molasına ulaş",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+                Text("$solved / $goal", style = MaterialTheme.typography.titleLarge)
+            }
+            LinearProgressIndicator(
+                progress = { progress },
+                modifier = Modifier.fillMaxWidth().height(8.dp).clip(CircleShape),
+                color = if (completed) BilGecSuccess else BilGecRed,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
+        }
+    }
+}
+
+@Composable
+private fun WeeklyProgressCard(days: List<DayProgress>) {
+    val maxSolved = days.maxOfOrNull { it.solved }?.coerceAtLeast(1) ?: 1
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(28.dp),
+        color = BilGecMidnight,
+        contentColor = Color.White,
+    ) {
+        Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column {
+                    Text("SON 7 GÜN", style = MaterialTheme.typography.labelMedium, color = BilGecPeach)
+                    Text("Merak ritmin", style = MaterialTheme.typography.titleLarge)
+                }
+                Text(
+                    "${days.sumOf { it.solved }} soru",
+                    style = MaterialTheme.typography.labelLarge,
+                    color = Color.White.copy(alpha = 0.72f),
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom,
+            ) {
+                days.forEach { day ->
+                    val barHeight = if (day.solved == 0) 5.dp else (12 + 50 * day.solved / maxSolved).dp
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(7.dp),
+                    ) {
+                        Text(day.solved.toString(), style = MaterialTheme.typography.labelMedium)
+                        Box(
+                            modifier = Modifier
+                                .width(24.dp)
+                                .height(64.dp)
+                                .clip(CircleShape)
+                                .background(Color.White.copy(alpha = 0.10f)),
+                            contentAlignment = Alignment.BottomCenter,
+                        ) {
+                            Box(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .height(barHeight)
+                                    .clip(CircleShape)
+                                    .background(Brush.verticalGradient(listOf(BilGecPeach, BilGecRed))),
+                            )
+                        }
+                        Text(
+                            day.date.dayOfWeek
+                                .getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("tr-TR"))
+                                .take(2),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color.White.copy(alpha = 0.66f),
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReviewScreen(
+    modifier: Modifier,
+    weakQuestions: List<QuizQuestion>,
+    favoriteQuestions: List<QuizQuestion>,
+    onQuestion: (QuizQuestion) -> Unit,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp, vertical = 18.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp),
+    ) {
+        AppHeader()
+        ScreenHeader(
+            kicker = "AKILLI TEKRAR",
+            title = "Bildiklerin kalsın,\nzorlandıkların kolaylaşsın.",
+            description = "Yanlış cevaplarını yeniden çöz veya sevdiğin bilgileri favorilerden aç.",
+        )
+
+        ReviewSection(
+            icon = Icons.Default.Replay,
+            title = "Tekrar bekleyenler",
+            questions = weakQuestions,
+            emptyText = "Henüz yanlış cevap yok. Böyle devam!",
+            onQuestion = onQuestion,
+        )
+        ReviewSection(
+            icon = Icons.Default.Star,
+            title = "Favoriler",
+            questions = favoriteQuestions,
+            emptyText = "Soru ekranındaki yıldızla bilgileri buraya ekleyebilirsin.",
+            onQuestion = onQuestion,
+        )
+        Spacer(Modifier.height(8.dp))
+    }
+}
+
+@Composable
+private fun ReviewSection(
+    icon: ImageVector,
+    title: String,
+    questions: List<QuizQuestion>,
+    emptyText: String,
+    onQuestion: (QuizQuestion) -> Unit,
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(26.dp),
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+    ) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(9.dp), verticalAlignment = Alignment.CenterVertically) {
+                Icon(icon, null, tint = BilGecRed)
+                Text(title, style = MaterialTheme.typography.titleLarge)
+                Text(
+                    questions.size.toString(),
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .padding(horizontal = 9.dp, vertical = 3.dp),
+                    style = MaterialTheme.typography.labelMedium,
+                )
+            }
+            if (questions.isEmpty()) {
+                Text(
+                    emptyText,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            } else {
+                questions.take(10).forEach { question ->
+                    ReviewQuestionRow(question = question, onClick = { onQuestion(question) })
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReviewQuestionRow(question: QuizQuestion, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(18.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.62f),
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AppLogo(34.dp)
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                Text(question.category.uppercase(), style = MaterialTheme.typography.labelMedium, color = BilGecRed)
+                Text(question.prompt, style = MaterialTheme.typography.titleMedium)
+            }
+            Icon(Icons.Default.PlayArrow, contentDescription = "Soruyu yeniden çöz", tint = BilGecRed)
         }
     }
 }
@@ -773,6 +1087,57 @@ private fun SettingsScreen(
             }
         }
 
+        SettingsCard(title = "Günlük hedef", icon = Icons.AutoMirrored.Filled.TrendingUp) {
+            Text(
+                "Günde kaç bilgi molasını tamamlamak istediğini seç.",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                AppPreferences.dailyGoalOptions.forEach { goal ->
+                    FilterChip(
+                        selected = preferences.dailyGoal == goal,
+                        onClick = { preferences.dailyGoal = goal; onChanged() },
+                        label = { Text(goal.toString()) },
+                        modifier = Modifier.weight(1f),
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = BilGecRed,
+                            selectedLabelColor = Color.White,
+                        ),
+                    )
+                }
+            }
+        }
+
+        SettingsCard(title = "Soru kategorileri", icon = Icons.Default.School) {
+            Text(
+                "BilGeç yalnızca açık kategorilerden soru seçer. En az biri açık kalır.",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            AppPreferences.questionCategories.forEach { category ->
+                val selected = category in preferences.selectedCategories
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(category, style = MaterialTheme.typography.titleMedium)
+                    Checkbox(
+                        checked = selected,
+                        onCheckedChange = { checked ->
+                            val updated = preferences.selectedCategories.toMutableSet().apply {
+                                if (checked) add(category) else remove(category)
+                            }
+                            if (updated.isNotEmpty()) {
+                                preferences.selectedCategories = updated
+                                onChanged()
+                            }
+                        },
+                        colors = CheckboxDefaults.colors(checkedColor = BilGecRed),
+                    )
+                }
+            }
+        }
+
         SettingsCard(title = "Sessiz zaman", icon = Icons.Default.Pause) {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(
@@ -821,10 +1186,14 @@ private fun SettingsScreen(
         ) {
             Column(Modifier.padding(22.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text("SORU KÜTÜPHANESİ", style = MaterialTheme.typography.labelMedium, color = BilGecRed)
-                Text(questionCount.toString(), fontSize = 44.sp, fontWeight = FontWeight.Bold)
+                Text(
+                    questionCount.takeIf { it > 0 }?.toString() ?: "—",
+                    fontSize = 44.sp,
+                    fontWeight = FontWeight.Bold,
+                )
                 Text("Çevrimdışı, hesap gerektirmeyen Türkçe soru.", color = Color.White.copy(alpha = 0.72f))
                 HorizontalDivider(color = Color.White.copy(alpha = 0.15f))
-                Text("BilGeç 1.1", style = MaterialTheme.typography.labelLarge)
+                Text("BilGeç 1.3", style = MaterialTheme.typography.labelLarge)
                 Text(
                     "Ülke verileri mledoze/countries, element verileri Periodic-Table-JSON, bayraklar flag-icons kaynaklarından paketlenir.",
                     style = MaterialTheme.typography.bodyMedium,

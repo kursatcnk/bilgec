@@ -1610,5 +1610,421 @@
     "explanation": "Damalı bayrak yarışın veya seansın tamamlandığını bildirir.",
     "factKey": "manual-sport:50",
     "reviewed": false
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir düzine kaç parçadan oluşur?",
+    "correct": "12",
+    "wrong": [
+      "10",
+      "20",
+      "24"
+    ],
+    "explanation": "Düzine, on iki parçadan oluşan bir grubu anlatır.",
+    "factKey": "manual-everyday:1",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir kilogram kaç gramdır?",
+    "correct": "1000 gram",
+    "wrong": [
+      "100 gram",
+      "500 gram",
+      "1500 gram"
+    ],
+    "explanation": "Bir kilogram bin grama eşittir.",
+    "factKey": "manual-everyday:2",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Yarım kilogram kaç gramdır?",
+    "correct": "500 gram",
+    "wrong": [
+      "250 gram",
+      "750 gram",
+      "1000 gram"
+    ],
+    "explanation": "Bir kilogram 1000 gram olduğu için yarısı 500 gramdır.",
+    "factKey": "manual-everyday:3",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir litre kaç mililitredir?",
+    "correct": "1000 mililitre",
+    "wrong": [
+      "100 mililitre",
+      "500 mililitre",
+      "1500 mililitre"
+    ],
+    "explanation": "Bir litre bin mililitreye eşittir.",
+    "factKey": "manual-everyday:4",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir üçgenin kaç kenarı vardır?",
+    "correct": "3",
+    "wrong": [
+      "4",
+      "5",
+      "6"
+    ],
+    "explanation": "Üçgen, üç kenarı ve üç köşesi olan bir şekildir.",
+    "factKey": "manual-everyday:5",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir altıgenin kaç kenarı vardır?",
+    "correct": "6",
+    "wrong": [
+      "5",
+      "7",
+      "8"
+    ],
+    "explanation": "Altıgenin altı kenarı bulunur.",
+    "factKey": "manual-everyday:6",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Dik açı kaç derecedir?",
+    "correct": "90 derece",
+    "wrong": [
+      "45 derece",
+      "60 derece",
+      "180 derece"
+    ],
+    "explanation": "Bir dik açının ölçüsü 90 derecedir.",
+    "factKey": "manual-everyday:7",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir on yılın diğer adı hangisidir?",
+    "correct": "On yıl",
+    "wrong": [
+      "Beş yıl",
+      "Yirmi yıl",
+      "Yüz yıl"
+    ],
+    "explanation": "Bir onyıl, on yıllık zaman dilimidir.",
+    "factKey": "manual-everyday:8",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir yüzyıl kaç yıldır?",
+    "correct": "100 yıl",
+    "wrong": [
+      "10 yıl",
+      "50 yıl",
+      "1000 yıl"
+    ],
+    "explanation": "Yüzyıl yüz yıllık bir zaman dilimidir.",
+    "factKey": "manual-everyday:9",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Artık yıl kaç gün sürer?",
+    "correct": "366 gün",
+    "wrong": [
+      "364 gün",
+      "365 gün",
+      "367 gün"
+    ],
+    "explanation": "Artık yıllarda şubat 29 gün çeker ve yıl 366 gün sürer.",
+    "factKey": "manual-everyday:10",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bir yılda kaç mevsim vardır?",
+    "correct": "4",
+    "wrong": [
+      "2",
+      "3",
+      "5"
+    ],
+    "explanation": "İlkbahar, yaz, sonbahar ve kış olmak üzere dört mevsim vardır.",
+    "factKey": "manual-everyday:11",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Yılın ilk ayı hangisidir?",
+    "correct": "Ocak",
+    "wrong": [
+      "Aralık",
+      "Şubat",
+      "Mart"
+    ],
+    "explanation": "Takvim yılı ocak ayıyla başlar.",
+    "factKey": "manual-everyday:12",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Cuma gününden sonra hangi gün gelir?",
+    "correct": "Cumartesi",
+    "wrong": [
+      "Perşembe",
+      "Pazar",
+      "Pazartesi"
+    ],
+    "explanation": "Haftalık sıralamada cumadan sonra cumartesi gelir.",
+    "factKey": "manual-everyday:13",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Trafik ışığında kırmızı renk ne anlama gelir?",
+    "correct": "Dur",
+    "wrong": [
+      "Geç",
+      "Hızlan",
+      "Sağa dön"
+    ],
+    "explanation": "Kırmızı ışık, araçların durması gerektiğini bildirir.",
+    "factKey": "manual-everyday:14",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Yön bulmak için kullanılan araç hangisidir?",
+    "correct": "Pusula",
+    "wrong": [
+      "Termometre",
+      "Kronometre",
+      "Cetvel"
+    ],
+    "explanation": "Pusulanın ibresi manyetik kuzey-güney doğrultusunu gösterir.",
+    "factKey": "manual-everyday:15",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Deniz seviyesinde su yaklaşık kaç derecede donar?",
+    "correct": "0 °C",
+    "wrong": [
+      "10 °C",
+      "50 °C",
+      "100 °C"
+    ],
+    "explanation": "Saf su deniz seviyesinde yaklaşık 0 santigrat derecede donar.",
+    "factKey": "manual-everyday:16",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Deniz seviyesinde su yaklaşık kaç derecede kaynar?",
+    "correct": "100 °C",
+    "wrong": [
+      "0 °C",
+      "50 °C",
+      "150 °C"
+    ],
+    "explanation": "Saf su deniz seviyesinde yaklaşık 100 santigrat derecede kaynar.",
+    "factKey": "manual-everyday:17",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "İnsan vücudunda kanı pompalayan organ hangisidir?",
+    "correct": "Kalp",
+    "wrong": [
+      "Akciğer",
+      "Mide",
+      "Böbrek"
+    ],
+    "explanation": "Kalp, kanı damarlar aracılığıyla vücuda pompalar.",
+    "factKey": "manual-everyday:18",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "İnsan vücudunun en büyük organı hangisidir?",
+    "correct": "Deri",
+    "wrong": [
+      "Kalp",
+      "Karaciğer",
+      "Akciğer"
+    ],
+    "explanation": "Deri, yüzey alanı ve ağırlık bakımından vücudun en büyük organıdır.",
+    "factKey": "manual-everyday:19",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Yetişkin bir insanda genellikle kaç diş bulunur?",
+    "correct": "32",
+    "wrong": [
+      "20",
+      "28",
+      "36"
+    ],
+    "explanation": "Yirmilik dişler dâhil yetişkinlerde genellikle 32 diş bulunur.",
+    "factKey": "manual-everyday:20",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Bitkilere yeşil rengini veren pigment hangisidir?",
+    "correct": "Klorofil",
+    "wrong": [
+      "Melanin",
+      "Hemoglobin",
+      "Keratin"
+    ],
+    "explanation": "Klorofil ışığı soğuran ve bitkilere yeşil görünüm veren pigmenttir.",
+    "factKey": "manual-everyday:21",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Ses hangi ortamda yayılamaz?",
+    "correct": "Boşlukta",
+    "wrong": [
+      "Havada",
+      "Suda",
+      "Katılarda"
+    ],
+    "explanation": "Sesin yayılması için titreşimi taşıyacak bir madde gerekir.",
+    "factKey": "manual-everyday:22",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Güneş enerjisi hangi enerji türüne örnektir?",
+    "correct": "Yenilenebilir enerji",
+    "wrong": [
+      "Fosil enerji",
+      "Nükleer yakıt",
+      "Tükenmiş enerji"
+    ],
+    "explanation": "Güneş ışığı doğal olarak yenilendiği için yenilenebilir enerji kaynağıdır.",
+    "factKey": "manual-everyday:23",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Dünya kendi ekseni etrafındaki dönüşünü yaklaşık ne kadar sürede tamamlar?",
+    "correct": "24 saat",
+    "wrong": [
+      "12 saat",
+      "7 gün",
+      "30 gün"
+    ],
+    "explanation": "Dünya'nın kendi ekseni çevresindeki bir dönüşü yaklaşık 24 saat sürer.",
+    "factKey": "manual-everyday:24",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Ay geceleri neden parlak görünür?",
+    "correct": "Güneş ışığını yansıttığı için",
+    "wrong": [
+      "Kendi ışığını ürettiği için",
+      "Dünya'yı ısıttığı için",
+      "Yıldız olduğu için"
+    ],
+    "explanation": "Ay kendi ışığını üretmez; üzerine düşen Güneş ışığını yansıtır.",
+    "factKey": "manual-everyday:25",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Işık yılı neyin ölçüsüdür?",
+    "correct": "Uzaklık",
+    "wrong": [
+      "Zaman",
+      "Sıcaklık",
+      "Hız"
+    ],
+    "explanation": "Işık yılı, ışığın bir yılda aldığı uzaklığı ifade eder.",
+    "factKey": "manual-everyday:26",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Siyah ve beyaz tuşlarıyla tanınan müzik aleti hangisidir?",
+    "correct": "Piyano",
+    "wrong": [
+      "Keman",
+      "Flüt",
+      "Davul"
+    ],
+    "explanation": "Piyano farklı sesleri üreten siyah ve beyaz tuşlara sahiptir.",
+    "factKey": "manual-everyday:27",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Standart bir kemanda kaç tel bulunur?",
+    "correct": "4",
+    "wrong": [
+      "3",
+      "5",
+      "6"
+    ],
+    "explanation": "Standart kemanın sol, re, la ve mi seslerine akortlanan dört teli vardır.",
+    "factKey": "manual-everyday:28",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "İstiklâl Marşı'nın şairi kimdir?",
+    "correct": "Mehmet Âkif Ersoy",
+    "wrong": [
+      "Yahya Kemal Beyatlı",
+      "Nazım Hikmet",
+      "Tevfik Fikret"
+    ],
+    "explanation": "İstiklâl Marşı'nın sözleri Mehmet Âkif Ersoy tarafından yazılmıştır.",
+    "factKey": "manual-everyday:29",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Küçük Prens kitabının yazarı kimdir?",
+    "correct": "Antoine de Saint-Exupéry",
+    "wrong": [
+      "Jules Verne",
+      "Victor Hugo",
+      "Albert Camus"
+    ],
+    "explanation": "Küçük Prens, Antoine de Saint-Exupéry'nin eseridir.",
+    "factKey": "manual-everyday:30",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Zeytinyağının temel hammaddesi hangisidir?",
+    "correct": "Zeytin",
+    "wrong": [
+      "Üzüm",
+      "Ayçiçeği",
+      "Susam"
+    ],
+    "explanation": "Zeytinyağı, zeytin meyvesinin işlenmesiyle elde edilir.",
+    "factKey": "manual-everyday:31",
+    "reviewed": true
+  },
+  {
+    "category": "Günlük Bilgi",
+    "prompt": "Yoğurdun temel hammaddesi hangisidir?",
+    "correct": "Süt",
+    "wrong": [
+      "Un",
+      "Yumurta",
+      "Pirinç"
+    ],
+    "explanation": "Yoğurt, sütün yararlı bakterilerle mayalanmasıyla üretilir.",
+    "factKey": "manual-everyday:32",
+    "reviewed": true
   }
 ]

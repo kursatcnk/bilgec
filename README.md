@@ -9,8 +9,12 @@ Hesap, reklam, sunucu veya çalışma anında internet bağlantısı kullanmaz. 
 - Instagram, TikTok, X, YouTube, Facebook, Reddit ve Snapchat için ortak aktif kullanım sayacı
 - 15, 30, 45 ve 60 dakikalık soru aralıkları
 - Bir saat veya gün sonuna kadar duraklatma
-- 3.082 kolay ve orta seviyeli çevrimdışı soru; bayraklar, coğrafya, temel bilim, tarih, sanat, doğa ve spor
+- 3.114 kolay ve orta seviyeli çevrimdışı soru; bayraklar, coğrafya, temel bilim, tarih, sanat, doğa, spor ve günlük bilgi
 - Görülmemiş bilgileri önceleyen, `factKey` tabanlı tekrar önleme
+- Yanlış cevapları öne alan akıllı tekrar ve ayrı tekrar ekranı
+- Soruları favorilere ekleme ve favorilerden yeniden çözme
+- Sekiz soru kategorisini ayrı ayrı açıp kapatma
+- Ayarlanabilir günlük hedef ve son yedi günlük gelişim grafiği
 - Günlük çözülen/doğru sayısı ve günlük seri
 - Açık, koyu ve sistem teması
 - Yeniden başlatma sonrasında takip servisini geri yükleme

@@ -160,6 +160,41 @@ const sportFacts = [
   ["Formula 1'de damalı bayrak neyi belirtir?", "Yarışın bittiğini", ["Güvenlik aracını", "Diskalifiyeyi", "Pistin kaygan olduğunu"], "Damalı bayrak yarışın veya seansın tamamlandığını bildirir."],
 ];
 
+const everydayFacts = [
+  ["Bir düzine kaç parçadan oluşur?", "12", ["10", "20", "24"], "Düzine, on iki parçadan oluşan bir grubu anlatır."],
+  ["Bir kilogram kaç gramdır?", "1000 gram", ["100 gram", "500 gram", "1500 gram"], "Bir kilogram bin grama eşittir."],
+  ["Yarım kilogram kaç gramdır?", "500 gram", ["250 gram", "750 gram", "1000 gram"], "Bir kilogram 1000 gram olduğu için yarısı 500 gramdır."],
+  ["Bir litre kaç mililitredir?", "1000 mililitre", ["100 mililitre", "500 mililitre", "1500 mililitre"], "Bir litre bin mililitreye eşittir."],
+  ["Bir üçgenin kaç kenarı vardır?", "3", ["4", "5", "6"], "Üçgen, üç kenarı ve üç köşesi olan bir şekildir."],
+  ["Bir altıgenin kaç kenarı vardır?", "6", ["5", "7", "8"], "Altıgenin altı kenarı bulunur."],
+  ["Dik açı kaç derecedir?", "90 derece", ["45 derece", "60 derece", "180 derece"], "Bir dik açının ölçüsü 90 derecedir."],
+  ["Bir on yılın diğer adı hangisidir?", "On yıl", ["Beş yıl", "Yirmi yıl", "Yüz yıl"], "Bir onyıl, on yıllık zaman dilimidir."],
+  ["Bir yüzyıl kaç yıldır?", "100 yıl", ["10 yıl", "50 yıl", "1000 yıl"], "Yüzyıl yüz yıllık bir zaman dilimidir."],
+  ["Artık yıl kaç gün sürer?", "366 gün", ["364 gün", "365 gün", "367 gün"], "Artık yıllarda şubat 29 gün çeker ve yıl 366 gün sürer."],
+  ["Bir yılda kaç mevsim vardır?", "4", ["2", "3", "5"], "İlkbahar, yaz, sonbahar ve kış olmak üzere dört mevsim vardır."],
+  ["Yılın ilk ayı hangisidir?", "Ocak", ["Aralık", "Şubat", "Mart"], "Takvim yılı ocak ayıyla başlar."],
+  ["Cuma gününden sonra hangi gün gelir?", "Cumartesi", ["Perşembe", "Pazar", "Pazartesi"], "Haftalık sıralamada cumadan sonra cumartesi gelir."],
+  ["Trafik ışığında kırmızı renk ne anlama gelir?", "Dur", ["Geç", "Hızlan", "Sağa dön"], "Kırmızı ışık, araçların durması gerektiğini bildirir."],
+  ["Yön bulmak için kullanılan araç hangisidir?", "Pusula", ["Termometre", "Kronometre", "Cetvel"], "Pusulanın ibresi manyetik kuzey-güney doğrultusunu gösterir."],
+  ["Deniz seviyesinde su yaklaşık kaç derecede donar?", "0 °C", ["10 °C", "50 °C", "100 °C"], "Saf su deniz seviyesinde yaklaşık 0 santigrat derecede donar."],
+  ["Deniz seviyesinde su yaklaşık kaç derecede kaynar?", "100 °C", ["0 °C", "50 °C", "150 °C"], "Saf su deniz seviyesinde yaklaşık 100 santigrat derecede kaynar."],
+  ["İnsan vücudunda kanı pompalayan organ hangisidir?", "Kalp", ["Akciğer", "Mide", "Böbrek"], "Kalp, kanı damarlar aracılığıyla vücuda pompalar."],
+  ["İnsan vücudunun en büyük organı hangisidir?", "Deri", ["Kalp", "Karaciğer", "Akciğer"], "Deri, yüzey alanı ve ağırlık bakımından vücudun en büyük organıdır."],
+  ["Yetişkin bir insanda genellikle kaç diş bulunur?", "32", ["20", "28", "36"], "Yirmilik dişler dâhil yetişkinlerde genellikle 32 diş bulunur."],
+  ["Bitkilere yeşil rengini veren pigment hangisidir?", "Klorofil", ["Melanin", "Hemoglobin", "Keratin"], "Klorofil ışığı soğuran ve bitkilere yeşil görünüm veren pigmenttir."],
+  ["Ses hangi ortamda yayılamaz?", "Boşlukta", ["Havada", "Suda", "Katılarda"], "Sesin yayılması için titreşimi taşıyacak bir madde gerekir."],
+  ["Güneş enerjisi hangi enerji türüne örnektir?", "Yenilenebilir enerji", ["Fosil enerji", "Nükleer yakıt", "Tükenmiş enerji"], "Güneş ışığı doğal olarak yenilendiği için yenilenebilir enerji kaynağıdır."],
+  ["Dünya kendi ekseni etrafındaki dönüşünü yaklaşık ne kadar sürede tamamlar?", "24 saat", ["12 saat", "7 gün", "30 gün"], "Dünya'nın kendi ekseni çevresindeki bir dönüşü yaklaşık 24 saat sürer."],
+  ["Ay geceleri neden parlak görünür?", "Güneş ışığını yansıttığı için", ["Kendi ışığını ürettiği için", "Dünya'yı ısıttığı için", "Yıldız olduğu için"], "Ay kendi ışığını üretmez; üzerine düşen Güneş ışığını yansıtır."],
+  ["Işık yılı neyin ölçüsüdür?", "Uzaklık", ["Zaman", "Sıcaklık", "Hız"], "Işık yılı, ışığın bir yılda aldığı uzaklığı ifade eder."],
+  ["Siyah ve beyaz tuşlarıyla tanınan müzik aleti hangisidir?", "Piyano", ["Keman", "Flüt", "Davul"], "Piyano farklı sesleri üreten siyah ve beyaz tuşlara sahiptir."],
+  ["Standart bir kemanda kaç tel bulunur?", "4", ["3", "5", "6"], "Standart kemanın sol, re, la ve mi seslerine akortlanan dört teli vardır."],
+  ["İstiklâl Marşı'nın şairi kimdir?", "Mehmet Âkif Ersoy", ["Yahya Kemal Beyatlı", "Nazım Hikmet", "Tevfik Fikret"], "İstiklâl Marşı'nın sözleri Mehmet Âkif Ersoy tarafından yazılmıştır."],
+  ["Küçük Prens kitabının yazarı kimdir?", "Antoine de Saint-Exupéry", ["Jules Verne", "Victor Hugo", "Albert Camus"], "Küçük Prens, Antoine de Saint-Exupéry'nin eseridir."],
+  ["Zeytinyağının temel hammaddesi hangisidir?", "Zeytin", ["Üzüm", "Ayçiçeği", "Susam"], "Zeytinyağı, zeytin meyvesinin işlenmesiyle elde edilir."],
+  ["Yoğurdun temel hammaddesi hangisidir?", "Süt", ["Un", "Yumurta", "Pirinç"], "Yoğurt, sütün yararlı bakterilerle mayalanmasıyla üretilir."],
+];
+
 function yearOptions(year) {
   const offsets = year < 100 ? [1, 5, 10] : [1, 5, 10];
   return offsets.map((offset, index) => String(year + offset * (index % 2 === 0 ? 1 : -1)));
@@ -203,4 +238,11 @@ const sports = sportFacts.map(([prompt, correct, wrong, explanation], index) => 
   reviewed: false,
 })).filter((_, index) => easySportIndexes.has(index));
 
-export const manualQuestions = [...history, ...art, ...nature, ...sports];
+const everyday = everydayFacts.map(([prompt, correct, wrong, explanation], index) => ({
+  category: "Günlük Bilgi",
+  prompt, correct, wrong, explanation,
+  factKey: `manual-everyday:${index + 1}`,
+  reviewed: true,
+}));
+
+export const manualQuestions = [...history, ...art, ...nature, ...sports, ...everyday];
