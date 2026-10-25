@@ -53,6 +53,15 @@ class AppPreferences(context: Context) {
         get() = preferences.getInt(keyDailyGoal, 5).takeIf { it in dailyGoalOptions } ?: 5
         set(value) = edit { putInt(keyDailyGoal, value.takeIf { it in dailyGoalOptions } ?: 5) }
 
+    val quickQuizBest: Int
+        get() = preferences.getInt(keyQuickQuizBest, 0)
+
+    val quickQuizLastScore: Int
+        get() = preferences.getInt(keyQuickQuizLastScore, -1)
+
+    val quickQuizCount: Int
+        get() = preferences.getInt(keyQuickQuizCount, 0)
+
     var currentQuestionId: Int
         get() = preferences.getInt(keyCurrentQuestionId, noQuestion)
         set(value) = edit { putInt(keyCurrentQuestionId, value) }
@@ -120,6 +129,15 @@ class AppPreferences(context: Context) {
         }
     }
 
+    fun recordQuickQuiz(score: Int) {
+        val safeScore = score.coerceIn(0, quickQuizSize)
+        edit {
+            putInt(keyQuickQuizLastScore, safeScore)
+            putInt(keyQuickQuizBest, maxOf(quickQuizBest, safeScore))
+            putInt(keyQuickQuizCount, quickQuizCount + 1)
+        }
+    }
+
     fun pauseForOneHour() {
         pauseUntilMs = System.currentTimeMillis() + 60 * 60 * 1_000L
     }
@@ -169,6 +187,7 @@ class AppPreferences(context: Context) {
     companion object {
         val intervalOptions = listOf(15, 30, 45, 60)
         val dailyGoalOptions = listOf(3, 5, 8, 10)
+        const val quickQuizSize = 5
         val questionCategories = listOf(
             "Bayraklar",
             "Coğrafya",
@@ -191,6 +210,9 @@ class AppPreferences(context: Context) {
         private const val keySelectedPackages = "selected_packages"
         private const val keySelectedCategories = "selected_categories"
         private const val keyDailyGoal = "daily_goal"
+        private const val keyQuickQuizBest = "quick_quiz_best"
+        private const val keyQuickQuizLastScore = "quick_quiz_last_score"
+        private const val keyQuickQuizCount = "quick_quiz_count"
         private const val keyCurrentQuestionId = "current_question_id"
         private const val keyLastCategory = "last_category"
         private const val keyStatsDate = "stats_date"

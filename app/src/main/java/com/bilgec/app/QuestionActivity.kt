@@ -29,7 +29,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.Button
@@ -43,8 +45,10 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -70,6 +74,7 @@ import com.bilgec.app.settings.AppPreferences
 import com.bilgec.app.tracking.TrackerService
 import com.bilgec.app.ui.theme.BilGecInk
 import com.bilgec.app.ui.theme.BilGecMidnight
+import com.bilgec.app.ui.theme.BilGecPeach
 import com.bilgec.app.ui.theme.BilGecRed
 import com.bilgec.app.ui.theme.BilGecSuccess
 import com.bilgec.app.ui.theme.BilGecTheme
@@ -83,7 +88,11 @@ class QuestionActivity : ComponentActivity() {
     private var questionState by mutableStateOf<QuizQuestion?>(null)
     private var errorState by mutableStateOf<String?>(null)
     private var favoriteState by mutableStateOf(false)
+    private var quickQuestionNumber by mutableIntStateOf(1)
+    private var quickScore by mutableIntStateOf(0)
+    private var quickQuizFinished by mutableStateOf(false)
     private val reviewMode: Boolean get() = intent.getBooleanExtra(extraReviewMode, false)
+    private val quickQuizMode: Boolean get() = intent.getBooleanExtra(extraQuickQuizMode, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +106,15 @@ class QuestionActivity : ComponentActivity() {
                     error = errorState,
                     isFavorite = favoriteState,
                     reviewMode = reviewMode,
+                    quickQuizMode = quickQuizMode,
+                    quickQuestionNumber = quickQuestionNumber,
+                    quickScore = quickScore,
+                    quickQuizFinished = quickQuizFinished,
                     onAnswer = ::recordAnswer,
                     onToggleFavorite = ::toggleFavorite,
                     onContinue = ::continueToPreviousApp,
+                    onRestartQuickQuiz = ::restartQuickQuiz,
+                    onCloseQuickQuiz = ::finish,
                 )
             }
         }
@@ -112,14 +127,18 @@ class QuestionActivity : ComponentActivity() {
                 withContext(Dispatchers.IO) {
                     // Servisin hazırladığı soru varsa onu aç, yoksa yeni bir tane seç.
                     val requestedId = intent.getIntExtra(extraQuestionId, AppPreferences.noQuestion)
-                    val savedId = requestedId.takeIf { it != AppPreferences.noQuestion }
-                        ?: preferences.currentQuestionId
+                    val savedId = if (quickQuizMode) {
+                        AppPreferences.noQuestion
+                    } else {
+                        requestedId.takeIf { it != AppPreferences.noQuestion }
+                            ?: preferences.currentQuestionId
+                    }
                     val question = (if (savedId != AppPreferences.noQuestion) repository.byId(savedId) else null)
                         ?: repository.next(
                             preferences.lastCategory,
                             preferences.selectedCategories,
                         ).also {
-                            preferences.currentQuestionId = it.id
+                            if (!quickQuizMode) preferences.currentQuestionId = it.id
                         }
                     question to repository.isFavorite(question.factKey)
                 }
@@ -133,14 +152,16 @@ class QuestionActivity : ComponentActivity() {
 
     private fun recordAnswer(question: QuizQuestion, selectedIndex: Int, onSaved: () -> Unit) {
         lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
+            val correct = withContext(Dispatchers.IO) {
                 val correct = selectedIndex == question.correctIndex
                 repository.markSeen(question, correct)
                 if (!reviewMode) {
                     preferences.lastCategory = question.category
                     preferences.recordAnswer(correct)
                 }
+                correct
             }
+            if (quickQuizMode && correct) quickScore++
             onSaved()
         }
     }
@@ -154,6 +175,18 @@ class QuestionActivity : ComponentActivity() {
     }
 
     private fun continueToPreviousApp() {
+        if (quickQuizMode) {
+            if (quickQuestionNumber < AppPreferences.quickQuizSize) {
+                quickQuestionNumber++
+                questionState = null
+                errorState = null
+                loadQuestion()
+            } else {
+                preferences.recordQuickQuiz(quickScore)
+                quickQuizFinished = true
+            }
+            return
+        }
         if (reviewMode) {
             finish()
             return
@@ -163,9 +196,19 @@ class QuestionActivity : ComponentActivity() {
         finishAndRemoveTask()
     }
 
+    private fun restartQuickQuiz() {
+        quickQuestionNumber = 1
+        quickScore = 0
+        quickQuizFinished = false
+        questionState = null
+        errorState = null
+        loadQuestion()
+    }
+
     companion object {
         const val extraQuestionId = "question_id"
         const val extraReviewMode = "review_mode"
+        const val extraQuickQuizMode = "quick_quiz_mode"
     }
 }
 
@@ -175,15 +218,28 @@ private fun QuestionOverlay(
     error: String?,
     isFavorite: Boolean,
     reviewMode: Boolean,
+    quickQuizMode: Boolean,
+    quickQuestionNumber: Int,
+    quickScore: Int,
+    quickQuizFinished: Boolean,
     onAnswer: (QuizQuestion, Int, () -> Unit) -> Unit,
     onToggleFavorite: (QuizQuestion) -> Unit,
     onContinue: () -> Unit,
+    onRestartQuickQuiz: () -> Unit,
+    onCloseQuickQuiz: () -> Unit,
 ) {
     var selectedIndex by remember(question?.id) { mutableStateOf<Int?>(null) }
     var savingAnswer by remember(question?.id) { mutableStateOf(false) }
     val haptic = LocalHapticFeedback.current
     val progress by animateFloatAsState(
-        targetValue = if (selectedIndex == null) 0.52f else 1f,
+        targetValue = if (quickQuizMode) {
+            ((quickQuestionNumber - 1) + if (selectedIndex == null) 0f else 1f) /
+                AppPreferences.quickQuizSize.toFloat()
+        } else if (selectedIndex == null) {
+            0.52f
+        } else {
+            1f
+        },
         label = "questionProgress",
     )
 
@@ -217,6 +273,8 @@ private fun QuestionOverlay(
                 QuestionBrandBar(
                     isFavorite = isFavorite,
                     reviewMode = reviewMode,
+                    quickQuizMode = quickQuizMode,
+                    quickQuestionNumber = quickQuestionNumber,
                     favoriteEnabled = question != null,
                     onToggleFavorite = { question?.let(onToggleFavorite) },
                 )
@@ -229,6 +287,12 @@ private fun QuestionOverlay(
 
                 when {
                     error != null -> ErrorContent(error = error, onContinue = onContinue)
+                    quickQuizFinished -> QuickQuizResult(
+                        score = quickScore,
+                        bestScore = maxOf(quickScore, AppPreferences(LocalContext.current).quickQuizBest),
+                        onRestart = onRestartQuickQuiz,
+                        onClose = onCloseQuickQuiz,
+                    )
                     question == null -> LoadingContent()
                     else -> {
                         Surface(
@@ -247,6 +311,8 @@ private fun QuestionOverlay(
                         Text(
                             if (reviewMode) {
                                 "Bu bilgiyi yeniden dene; yanlışlar tekrar ettikçe kolaylaşır."
+                            } else if (quickQuizMode) {
+                                "Tur puanın: $quickScore • Acele etme, düşün ve seç."
                             } else {
                                 "Bir seçim yap, bilgiyi cebine koy ve kaldığın yere dön."
                             },
@@ -297,7 +363,15 @@ private fun QuestionOverlay(
                                     contentColor = Color.White,
                                 ),
                             ) {
-                                Text(if (reviewMode) "Tekrar listesine dön" else "Uygulamaya devam et")
+                                Text(
+                                    when {
+                                        reviewMode -> "Tekrar listesine dön"
+                                        quickQuizMode && quickQuestionNumber < AppPreferences.quickQuizSize ->
+                                            "Sıradaki soru"
+                                        quickQuizMode -> "Turu tamamla"
+                                        else -> "Uygulamaya devam et"
+                                    },
+                                )
                                 Spacer(Modifier.size(8.dp))
                                 Icon(Icons.AutoMirrored.Filled.ArrowForward, null)
                             }
@@ -313,6 +387,8 @@ private fun QuestionOverlay(
 private fun QuestionBrandBar(
     isFavorite: Boolean,
     reviewMode: Boolean,
+    quickQuizMode: Boolean,
+    quickQuestionNumber: Int,
     favoriteEnabled: Boolean,
     onToggleFavorite: () -> Unit,
 ) {
@@ -334,7 +410,11 @@ private fun QuestionBrandBar(
             Column {
                 Text("BilGeç", style = MaterialTheme.typography.titleMedium)
                 Text(
-                    if (reviewMode) "TEKRAR MODU" else "KISA BİLGİ MOLASI",
+                    when {
+                        reviewMode -> "TEKRAR MODU"
+                        quickQuizMode -> "HIZLI TUR"
+                        else -> "KISA BİLGİ MOLASI"
+                    },
                     style = MaterialTheme.typography.labelMedium,
                     color = BilGecRed,
                 )
@@ -353,7 +433,7 @@ private fun QuestionBrandBar(
                 color = MaterialTheme.colorScheme.surfaceVariant,
             ) {
                 Text(
-                    "1 / 1",
+                    if (quickQuizMode) "$quickQuestionNumber / ${AppPreferences.quickQuizSize}" else "1 / 1",
                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 7.dp),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -434,6 +514,76 @@ private fun ResultPanel(isCorrect: Boolean, correctAnswer: String, explanation: 
                 color = if (isCorrect) Color(0xFF075E40) else Color(0xFF8C1111),
             )
             Text(explanation, color = BilGecInk, style = MaterialTheme.typography.bodyLarge)
+        }
+    }
+}
+
+@Composable
+private fun QuickQuizResult(
+    score: Int,
+    bestScore: Int,
+    onRestart: () -> Unit,
+    onClose: () -> Unit,
+) {
+    val message = when (score) {
+        5 -> "Kusursuz tur! Bugün zihnin oldukça açık."
+        4 -> "Çok iyi! Bir soru daha ve tam puandı."
+        3 -> "Güzel tur. Yeni bilgiler yerine oturuyor."
+        else -> "Her tur bir tekrar. Bir sonraki daha iyi gelecek."
+    }
+    Column(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(18.dp),
+    ) {
+        Surface(
+            shape = CircleShape,
+            color = BilGecPeach,
+            contentColor = BilGecRed,
+        ) {
+            Icon(
+                Icons.Default.EmojiEvents,
+                contentDescription = null,
+                modifier = Modifier.padding(18.dp).size(44.dp),
+            )
+        }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Tur tamamlandı", style = MaterialTheme.typography.headlineMedium)
+            Text(
+                "$score / ${AppPreferences.quickQuizSize}",
+                fontSize = 48.sp,
+                fontWeight = FontWeight.Bold,
+                color = BilGecRed,
+            )
+        }
+        Text(
+            message,
+            style = MaterialTheme.typography.bodyLarge,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+        ) {
+            Text(
+                "En iyi skorun: $bestScore / ${AppPreferences.quickQuizSize}",
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
+        Button(
+            onClick = onRestart,
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(18.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = BilGecMidnight),
+        ) {
+            Icon(Icons.Default.Replay, contentDescription = null)
+            Spacer(Modifier.size(8.dp))
+            Text("Bir tur daha")
+        }
+        TextButton(onClick = onClose, modifier = Modifier.fillMaxWidth()) {
+            Text("Ana ekrana dön")
         }
     }
 }

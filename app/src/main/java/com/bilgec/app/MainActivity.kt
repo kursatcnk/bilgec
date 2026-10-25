@@ -38,6 +38,7 @@ import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.LocalFireDepartment
@@ -52,6 +53,7 @@ import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Smartphone
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Timer
+import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -173,6 +175,7 @@ class MainActivity : ComponentActivity() {
                     onChanged = { refreshCounter++ },
                     onReset = ::resetData,
                     onReviewQuestion = ::openReviewQuestion,
+                    onQuickQuiz = ::openQuickQuiz,
                 )
             }
         }
@@ -243,6 +246,13 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    private fun openQuickQuiz() {
+        startActivity(
+            Intent(this, QuestionActivity::class.java)
+                .putExtra(QuestionActivity.extraQuickQuizMode, true),
+        )
+    }
+
     private fun handleIntent(intent: Intent) {
         if (intent.action == ACTION_START_TRACKING) startTracker()
     }
@@ -294,6 +304,7 @@ private fun BilGecApp(
     onChanged: () -> Unit,
     onReset: () -> Unit,
     onReviewQuestion: (QuizQuestion) -> Unit,
+    onQuickQuiz: () -> Unit,
 ) {
     var page by remember { mutableStateOf(AppPage.HOME) }
     var elapsedMs by remember { mutableLongStateOf(preferences.elapsedMs) }
@@ -327,6 +338,7 @@ private fun BilGecApp(
                 onOpenUsageAccess = onOpenUsageAccess,
                 onOpenOverlayAccess = onOpenOverlayAccess,
                 onNotificationAccess = onNotificationAccess,
+                onQuickQuiz = onQuickQuiz,
             )
             AppPage.REVIEW -> ReviewScreen(
                 modifier = Modifier.padding(padding),
@@ -397,6 +409,7 @@ private fun HomeScreen(
     onOpenUsageAccess: () -> Unit,
     onOpenOverlayAccess: () -> Unit,
     onNotificationAccess: () -> Unit,
+    onQuickQuiz: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -439,6 +452,13 @@ private fun HomeScreen(
             onToggle = { if (it) onStart() else onStop() },
         )
 
+        QuickQuizCard(
+            bestScore = preferences.quickQuizBest,
+            lastScore = preferences.quickQuizLastScore,
+            quizCount = preferences.quickQuizCount,
+            onStart = onQuickQuiz,
+        )
+
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             SmallStatCard(Icons.Default.School, stats.solved.toString(), "Bugün", Modifier.weight(1f))
             SmallStatCard(Icons.Default.CheckCircle, stats.correct.toString(), "Doğru", Modifier.weight(1f))
@@ -446,6 +466,7 @@ private fun HomeScreen(
         }
 
         DailyGoalCard(solved = stats.solved, goal = dailyGoal)
+        AchievementRow(stats = stats, weeklySolved = weeklyStats.sumOf { it.solved })
         WeeklyProgressCard(days = weeklyStats)
 
         if (!permissions.allGranted) {
@@ -496,6 +517,122 @@ private fun HomeScreen(
             }
         }
         Spacer(Modifier.height(8.dp))
+    }
+}
+
+@Composable
+private fun QuickQuizCard(
+    bestScore: Int,
+    lastScore: Int,
+    quizCount: Int,
+    onStart: () -> Unit,
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(28.dp),
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        shadowElevation = 5.dp,
+    ) {
+        Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(15.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Surface(shape = RoundedCornerShape(16.dp), color = BilGecPeach.copy(alpha = 0.65f)) {
+                        Icon(
+                            Icons.Default.Bolt,
+                            contentDescription = null,
+                            tint = BilGecRed,
+                            modifier = Modifier.padding(10.dp).size(24.dp),
+                        )
+                    }
+                    Column {
+                        Text("5 soruluk hızlı tur", style = MaterialTheme.typography.titleLarge)
+                        Text(
+                            "Takip sayacını beklemeden bilgini sına",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                }
+            }
+
+            if (quizCount > 0) {
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text(
+                        "En iyi $bestScore / ${AppPreferences.quickQuizSize}",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = BilGecRed,
+                    )
+                    Text("•", color = MaterialTheme.colorScheme.outline)
+                    Text(
+                        "Son tur $lastScore doğru",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
+
+            Button(
+                onClick = onStart,
+                modifier = Modifier.fillMaxWidth().height(52.dp),
+                shape = RoundedCornerShape(17.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = BilGecRed),
+            ) {
+                Icon(Icons.Default.PlayArrow, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
+                Text(if (quizCount == 0) "İlk turu başlat" else "Yeni tur başlat")
+            }
+        }
+    }
+}
+
+@Composable
+private fun AchievementRow(stats: DailyStats, weeklySolved: Int) {
+    val badges = listOf(
+        Triple(Icons.Default.CheckCircle, "İlk adım", stats.solved >= 1),
+        Triple(Icons.Default.LocalFireDepartment, "3 gün seri", stats.streak >= 3),
+        Triple(Icons.Default.EmojiEvents, "Haftalık 25", weeklySolved >= 25),
+    )
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        Text("MİNİ ROZETLER", style = MaterialTheme.typography.labelMedium, color = BilGecRed)
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            badges.forEach { (icon, label, unlocked) ->
+                Surface(
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(18.dp),
+                    color = if (unlocked) BilGecPeach.copy(alpha = 0.58f) else MaterialTheme.colorScheme.surface,
+                    border = BorderStroke(
+                        1.dp,
+                        if (unlocked) BilGecRed.copy(alpha = 0.3f) else MaterialTheme.colorScheme.outlineVariant,
+                    ),
+                ) {
+                    Column(
+                        Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        Icon(
+                            icon,
+                            contentDescription = null,
+                            tint = if (unlocked) BilGecRed else MaterialTheme.colorScheme.outline,
+                            modifier = Modifier.size(21.dp),
+                        )
+                        Text(
+                            label,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = if (unlocked) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.outline,
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 

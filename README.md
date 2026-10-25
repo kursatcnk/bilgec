@@ -15,6 +15,8 @@ Hesap, reklam, sunucu veya çalışma anında internet bağlantısı kullanmaz. 
 - Soruları favorilere ekleme ve favorilerden yeniden çözme
 - Sekiz soru kategorisini ayrı ayrı açıp kapatma
 - Ayarlanabilir günlük hedef ve son yedi günlük gelişim grafiği
+- Uygulama içinden başlatılan 5 soruluk hızlı tur, tur puanı ve en iyi skor
+- İlk cevap, üç günlük seri ve haftalık 25 soru için mini başarı rozetleri
 - Günlük çözülen/doğru sayısı ve günlük seri
 - Açık, koyu ve sistem teması
 - Yeniden başlatma sonrasında takip servisini geri yükleme
